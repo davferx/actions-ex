@@ -76,3 +76,8 @@
     echo cl.exe ----------------------------------------------------------------
     pushd "c:\Program Files (x86)\Microsoft Visual Studio"
     dir /s/b cl.exe
+
+    echo.
+    echo ninja.exe -------------------------------------------------------------
+    pushd "c:\"
+    dir /s/b ninja.exe
