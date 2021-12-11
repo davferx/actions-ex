@@ -11,6 +11,6 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - name: Run test.cmd
-              run: test.cmd
+              run: cmd.exe /c test.cmd
             - name: Run test.cmd output to file
-              run: test.cmd >log2.txt
+              run: cmd.exe /c test.cmd >log2.txt
