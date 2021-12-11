@@ -14,12 +14,12 @@ jobs:
         runs-on: windows-latest
         steps:
             - uses: actions/checkout@v2
-            
+
             - name: Run test.cmd
-                run: test.cmd
+              run: test.cmd
 
             - uses: actions/upload-artifact@v2
-                with:
-                   name: my-artifact
-                   path: path/to/artifact/world.txt
-                   retention-days: 3
+              with:
+                  name: my-artifact
+                  path: path/to/artifact/world.txt
+                  retention-days: 3
