@@ -5,16 +5,12 @@ name: main
 on: [push, workflow_dispatch]
 
 jobs:
-  build:
-    runs-on: windows-latest
+    build:
+        runs-on: windows-latest
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run a one-line script
-        run: echo Hello, world! from windows
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build, from win32
-          echo test, and deploy your project. from win32
+        steps:
+            - uses: actions/checkout@v2
+            - name: Run test.cmd
+              run: test.cmd
+            - name: Run test.cmd output to file
+              run: test.cmd >log2.txt
