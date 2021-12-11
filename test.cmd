@@ -2,6 +2,10 @@
     setlocal enableextensions
     echo You are running the test.cmd script
 
+    mkdir artifact
+    echo log1 text > artifact\log1.txt
+    echo log2 text > artifact\log2.txt
+
     where node
     where python
     where cmake
@@ -72,10 +76,10 @@
     dir y:\
     dir z:\
 
-    echo.
-    echo cl.exe ----------------------------------------------------------------
-    pushd "c:\Program Files (x86)\Microsoft Visual Studio"
-    dir /s/b cl.exe
+    :: echo.
+    :: echo cl.exe ----------------------------------------------------------------
+    :: pushd "c:\Program Files (x86)\Microsoft Visual Studio"
+    :: dir /s/b cl.exe
 
     echo.
     echo ninja.exe -------------------------------------------------------------

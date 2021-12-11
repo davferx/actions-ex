@@ -1,2 +1,4 @@
+artifact/
 build/
+logs/
 node_modules/
