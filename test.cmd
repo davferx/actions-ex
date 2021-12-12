@@ -49,33 +49,8 @@
     dir /a/b "%ProgramFiles(x86)%"
 
     echo.
-    echo Drives ----------------------------------------------------------------
-    dir a:\
-    dir b:\
-    dir c:\
-    dir d:\
-    dir e:\
-    dir f:\
-    dir g:\
-    dir h:\
-    dir i:\
-    dir j:\
-    dir k:\
-    dir l:\
-    dir m:\
-    dir n:\
-    dir o:\
-    dir p:\
-    dir q:\
-    dir r:\
-    dir s:\
-    dir t:\
-    dir u:\
-    dir v:\
-    dir w:\
-    dir x:\
-    dir y:\
-    dir z:\
+    echo msys64 ----------------------------------------------------------------
+    dir /a/b "c:\msys64"
 
     :: echo.
     :: echo cl.exe ----------------------------------------------------------------
@@ -87,4 +62,5 @@
     :: pushd "c:\"
     :: dir /s/b ninja.exe
 
-    dir /a/b d:\
+    echo done
+    
