@@ -6,18 +6,18 @@ name: main
 on: [push, workflow_dispatch]
 
 defaults:
-    run:
-        shell: cmd
+  run:
+    shell: cmd
 
 jobs:
-    build:
-        runs-on: windows-latest
-        steps:
-            - uses: actions/checkout@v2
-            - name: Run test.cmd
-              run: test.cmd
-            - uses: actions/upload-artifact@v2
-              with:
-                  name: my-artifact
-                  path: path/to/artifact/world.txt
-                  retention-days: 3
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run test.cmd
+        run: test.cmd
+      - uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: path/to/artifact/world.txt
+          retention-days: 3
