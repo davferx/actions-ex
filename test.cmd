@@ -2,9 +2,10 @@
     setlocal enableextensions
     echo You are running the test.cmd script
 
-    mkdir artifact
-    echo log1 text > artifact\log1.txt
-    echo log2 text > artifact\log2.txt
+    mkdir artifacts
+    echo log1 text > artifacts\log1.txt
+    echo log2 text > artifacts\log2.txt
+    copy c:\InstalledSoftware.md artifacts
 
     where node
     where python
