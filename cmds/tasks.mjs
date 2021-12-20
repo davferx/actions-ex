@@ -2,37 +2,28 @@
 import {rmdir, unlink} from 'fs/promises'
 import {spawn, spawnSync} from 'child_process'
 
-var isWatch = false
+let isWatch = false
 
 function ignore() {}
 
-const cmdList = {
+const commands = {
     //- Cleaning ---------------------------------------------------------------
-    async bareMetal() {
+    bare() {
         this.clean()
-        await rmdir('node_modules', {recursive: true})
-        await unlink('package-lock.json').catch(ignore)
-        await unlink('pnpm-lock.yaml').catch(ignore)
+        rmdir('node_modules', {recursive: true})
+        unlink('package-lock.json').catch(ignore)
+        unlink('pnpm-lock.yaml').catch(ignore)
     },
-    async clean() {
-        await rmdir('int', {recursive: true})
-        await rmdir('bin', {recursive: true})
+    clean() {
+        unlink('../cmds.js.map').catch(ignore)
     },
 
     //- Building ---------------------------------------------------------------
     tsc() {
-        nodeRun(['tsc'])
+        nodeRun('tsc')
     },
     esbuild() {
-        nodeRun([
-            'esbuild',
-            '--bundle',
-            '--outdir=..',
-            '--platform=node',
-            '--sourcemap',
-            '--target=es2015', // same setting in tsconfig.json
-            'cmds.ts'
-        ])
+        nodeRun('esbuild', '--bundle --outdir=.. --platform=node --sourcemap --target=es2015 cmds.ts')
     },
     build() {
         spawnSync('npm.cmd', ['i'], {stdio: 'inherit'})
@@ -48,25 +39,16 @@ const cmdList = {
     }
 }
 
-// Conditionally add --watch to command invocation
-function nodeRun(args) {
-    args[0] = 'node_modules\\.bin\\' + args[0] + '.cmd'
-    if (isWatch) args.push('--watch')
-    args.unshift('/c')
-    console.log('cmd.exe ' + args.join(' '))
-    isWatch ? spawn('cmd.exe', args, {stdio: 'inherit'}) : spawnSync('cmd.exe', args, {stdio: 'inherit'})
+function nodeRun(cmd, args = '') {
+    cmd = `node_modules\\.bin\\${cmd}.cmd ${args} ${isWatch ? '--watch' : ''}`
+    isWatch ? spawn('cmd.exe', ['/c', cmd], {stdio: 'inherit'}) : spawnSync('cmd.exe', ['/c', cmd], {stdio: 'inherit'})
 }
 
-function main() {
-    if (process.argv[3] === '--watch') isWatch = true
-    const cmd = (process.argv[2] || '').toLowerCase()
-    for (const x in cmdList) {
-        if (x.toLowerCase() === cmd) {
-            cmdList[x]()
-            return
-        }
-    }
-    console.log('Unknown command')
+// @ts-ignore 7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type
+const fn = commands[process.argv[2]]
+if (fn) {
+    fn.call(commands)
+} else {
+    console.error(`Invalid command`)
+    console.error(commands)
 }
-
-main()

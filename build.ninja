@@ -2,20 +2,16 @@ rule DoCmd
   command = $CMD
   description = $DESC
 
-globalName = xyzzy
+build build/.: DoCmd
+    CMD = mkdir build
 
-build one: DoCmd
-    CMD = echo do cmd one
-    DESC = describing command one
+build build/set-msvc-env.ps1: DoCmd build/.
+    CMD = node cmds.js createMsvcScript
 
-build two: DoCmd
-    XONE = this is one
-    XTWO = this is two
-    CMD = echo $XONE and $XTWO also $globalName
-    DESC = describing command TWO
+build clean: DoCmd
+    CMD = node cmds.js clean
 
-build three: phony two
-    XONE = this is one
-    XTWO = this is two
-    CMD = echo $XONE and $XTWO also $globalName
-    DESC = describing command TWO
+build bare: DoCmd
+    CMD = node cmds.js bare
+
+build all: phony build/set-msvc-env.ps1

@@ -1,6 +1,6 @@
 import {execSync} from 'child_process'
 import FastGlob from 'fast-glob'
-import {writeFile} from 'fs/promises'
+import {rmdir, unlink, writeFile} from 'fs/promises'
 import OS from 'os'
 
 const fnameSetMsvcEnv = 'set-msvc-env.ps1'
@@ -12,7 +12,19 @@ function singleQuotePs(s: string) {
 }
 
 const commands = {
-    async createEnvScript() {
+    bare() {
+        this.clean()
+        rmdir('cmds/node_modules', {recursive: true})
+        rmdir('build', {recursive: true})
+        unlink('cmds/package-lock.json').catch(ignore)
+        unlink('cmds/pnpm-lock.yaml').catch(ignore)
+    },
+    clean() {
+        unlink('cmds.js.map').catch(ignore)
+        unlink('.pnpm-debug.log').catch(ignore)
+        unlink('.ninja-log').catch(ignore)
+    },
+    async createMsvcScript() {
         //- Find the latest version of VsDevCmd.bat
         let bestVer = 0
         let bestName = ''
@@ -41,10 +53,7 @@ const commands = {
         const envStrs = execSync(cmd, {stdio: ['inherit', 'pipe', 'inherit'], encoding: 'utf8'}).split('\n')
 
         //- Build a list of the environment variable that are different and write them to a PS1 file
-        let psTxt: string[] = [
-            `SourceDir=_this_dir`,
-            `BuildDir=_this_dir/build`,
-        ]
+        let psTxt: string[] = [`SourceDir=_this_dir`, `BuildDir=_this_dir/build`]
         for (let str of envStrs) {
             str = str.trim()
             const i = str.indexOf('=')

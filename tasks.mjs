@@ -1,55 +1,36 @@
 'use strict'
-import {rmdir} from 'fs/promises'
-import {execSync} from 'child_process'
-import {randomBytes} from 'crypto'
+import {rmdir, unlink} from 'fs/promises'
+import {spawn, spawnSync} from 'child_process'
 
-function getUniqueId2() {
-    if (!getUniqueId2.id) getUniqueId2.id = randomBytes(16).toString('hex')
-    return getUniqueId2.id
-}
+let isWatch = false
 
-function createVsDevCmd(dstDir) {
-    const dst = path.join(dstDir, 'vs-dev-cmd.cmd')
-    console.log(`target:  ${dst}`)
-}
+function ignore() {}
 
-const cmdList = {
-    version() {
-        console.log(`Welcome to tasks.js!`)
-    },
-    bareMetal() {
+const commands = {
+    //- Cleaning ---------------------------------------------------------------
+    bare() {
         this.clean()
+        rmdir('cmds/node_modules', {recursive: true})
+        rmdir('build', {recursive: true})
+        unlink('cmds/package-lock.json').catch(ignore)
+        unlink('cmds/pnpm-lock.yaml').catch(ignore)
     },
-    async clean() {
-        await rmdir('build', {recursive: true})
+    clean() {
+        unlink('cmds.js.map').catch(ignore)
     },
-    cg() {
-        // cmakeGenerate
-        this.clean()
-        execSync(
-            `call "c:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\Tools\\VsDevCmd.bat" -arch=amd64 -host_arch=amd64 && cmake.exe -Bbuild -G"Ninja Multi-Config"`,
-            {stdio: 'inherit'}
-        )
-    },
-    guid() {
-        console.log(`getid [${getUniqueId2()}]`)
-        console.log(`getid [${getUniqueId2()}]`)
-        console.log(`getid [${getUniqueId2()}]`)
-    },
-    cvs() {
-        // createVsDevCmd
-        createVsDevCmd('build')
-    }
+
 }
 
-function main() {
-    const cmd = (process.argv[2] || '').toLowerCase()
-    for (const x in cmdList) {
-        if (x.toLowerCase() === cmd) {
-            return cmdList[x]()
-        }
-    }
-    console.log('Unknown command')
+function nodeRun(cmd, args = '') {
+    cmd = `node_modules\\.bin\\${cmd}.cmd ${args} ${isWatch ? '--watch' : ''}`
+    isWatch ? spawn('cmd.exe', ['/c', cmd], {stdio: 'inherit'}) : spawnSync('cmd.exe', ['/c', cmd], {stdio: 'inherit'})
 }
 
-main()
+// @ts-ignore 7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type
+const fn = commands[process.argv[2]]
+if (fn) {
+    fn.call(commands)
+} else {
+    console.error(`Invalid command`)
+    console.error(commands)
+}

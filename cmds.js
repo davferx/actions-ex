@@ -5273,13 +5273,26 @@ var import_child_process = __toESM(require("child_process"));
 var import_fast_glob = __toESM(require_out4());
 var import_promises = __toESM(require("fs/promises"));
 var import_os = __toESM(require("os"));
+var fnameSetMsvcEnv = "set-msvc-env.ps1";
 function ignore() {
 }
 function singleQuotePs(s) {
   return "'" + s.replace(/'/g, "''") + "'";
 }
 var commands = {
-  createEnvScript() {
+  bare() {
+    this.clean();
+    (0, import_promises.rmdir)("cmds/node_modules", { recursive: true });
+    (0, import_promises.rmdir)("build", { recursive: true });
+    (0, import_promises.unlink)("cmds/package-lock.json").catch(ignore);
+    (0, import_promises.unlink)("cmds/pnpm-lock.yaml").catch(ignore);
+  },
+  clean() {
+    (0, import_promises.unlink)("cmds.js.map").catch(ignore);
+    (0, import_promises.unlink)(".pnpm-debug.log").catch(ignore);
+    (0, import_promises.unlink)(".ninja-log").catch(ignore);
+  },
+  createMsvcScript() {
     return __async(this, null, function* () {
       let bestVer = 0;
       let bestName = "";
@@ -5301,10 +5314,7 @@ var commands = {
         return;
       const cmd = `"${bestName}" -no_logo -arch=amd64 -host_arch=amd64 -app_platform=Desktop && set`;
       const envStrs = (0, import_child_process.execSync)(cmd, { stdio: ["inherit", "pipe", "inherit"], encoding: "utf8" }).split("\n");
-      let psTxt = [
-        `SourceDir=_this_dir`,
-        `BuildDir=_this_dir/build`
-      ];
+      let psTxt = [`SourceDir=_this_dir`, `BuildDir=_this_dir/build`];
       for (let str of envStrs) {
         str = str.trim();
         const i = str.indexOf("=");
@@ -5314,18 +5324,8 @@ var commands = {
           continue;
         psTxt.push(`$Env:${name} = ${singleQuotePs(value)}`);
       }
-      yield (0, import_promises.writeFile)("set-msvc-env.ps1", psTxt.join(import_os.default.EOL));
+      yield (0, import_promises.writeFile)(fnameSetMsvcEnv, psTxt.join(import_os.default.EOL));
     });
-  },
-  ces() {
-    this.createEnvScript();
-  },
-  version() {
-    console.log(`version 1.0`);
-    let t = "hi";
-    console.log(`singleQuotePs(t)= [${singleQuotePs(t)}]`);
-    t = "Merry 'Christmas' dude";
-    console.log(`singleQuotePs(t)= [${singleQuotePs(t)}]`);
   }
 };
 var fn = commands[process.argv[2]];
