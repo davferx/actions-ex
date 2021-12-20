@@ -2,15 +2,27 @@ rule DoCmd
   command = $CMD
   description = $DESC
 
-build build/: DoCmd
+ENV =cmd /c call build\set-msvc-env.cmd && cd
+
+build build\: DoCmd
     CMD = mkdir build
 
-build build/set-msvc-env.cmd: DoCmd build/ CMakeLists.txt
-    CMD = cmd /c cd ./build && node ..\cmds.js createMsvcScript
+build build\set-msvc-env.cmd: DoCmd build\ CMakeLists.txt
+    CMD = cmd /c cd build && node ..\cmds.js createMsvcScript
 
-build build/dbg/build.ninja: DoCmd build/set-msvc-env.cmd
-    CMD = cmd /c echo done
+# dbg --------------------------------------------------------------------------
+build build\dbg\build.ninja: DoCmd build\set-msvc-env.cmd
+    CMD = $ENV . && cmake -G Ninja -B build\dbg -D CMAKE_BUILD_TYPE=Debug
 
+build build\dbg\app\app.exe: DoCmd build\dbg\build.ninja
+    CMD = $ENV build\dbg && ninja --verbose
+
+# rel --------------------------------------------------------------------------
+build build\rel\build.ninja: DoCmd build\set-msvc-env.cmd
+    CMD = $ENV . && cmake -G Ninja -B build\rel -D CMAKE_BUILD_TYPE=Release
+
+build build\rel\app\app.exe: DoCmd build\rel\build.ninja
+    CMD = $ENV build\rel && ninja --verbose
 
 
 build clean: DoCmd
@@ -19,6 +31,6 @@ build clean: DoCmd
 build bare: DoCmd
     CMD = node cmds.js bare
 
-build all: phony build/set-msvc-env.cmd
+build all: phony build\dbg\app\app.exe build\rel\app\app.exe
 
 default all

@@ -1,4 +1,4 @@
-import {execSync} from 'child_process'
+import {execSync,spawnSync} from 'child_process'
 import FastGlob from 'fast-glob'
 import {rmdir, unlink, writeFile} from 'fs/promises'
 import OS from 'os'
@@ -7,9 +7,9 @@ const fnameSetMsvcEnv = 'set-msvc-env.cmd'
 
 function ignore() {}
 
-function singleQuotePs(s: string) {
-    return "'" + s.replace(/'/g, "''") + "'"
-}
+// function singleQuotePs(s: string) {
+//     return "'" + s.replace(/'/g, "''") + "'"
+// }
 
 const commands = {
     bare() {
@@ -24,6 +24,11 @@ const commands = {
         unlink('.pnpm-debug.log').catch(ignore)
         unlink('.ninja_log').catch(ignore)
     },
+    rebuild() {
+        this.bare()
+        spawnSync('cmd.exe', ['/c', 'ninja.exe'], {stdio: 'inherit'})
+    },
+
     async createMsvcScript() {
         //- Find the latest version of VsDevCmd.bat
         let bestVer = 0
@@ -53,14 +58,15 @@ const commands = {
         const envStrs = execSync(cmd, {stdio: ['inherit', 'pipe', 'inherit'], encoding: 'utf8'}).split('\n')
 
         //- Build a list of the environment variable that are different and write them to a PS1 file
-        let psTxt: string[] = [`@echo off`,`set SourceDir=_this_dir`, `set BuildDir=_this_dir/build`]
+        let psTxt: string[] = [`@echo off`, `set SourceDir=_this_dir`, `set BuildDir=_this_dir/build`]
         for (let str of envStrs) {
             str = str.trim()
             const i = str.indexOf('=')
             const name = str.slice(0, i)
             const value = str.slice(i + 1)
             if (i === -1 || name.startsWith('__') || process.env[name] === value) continue
-            psTxt.push(`set ${name}=${singleQuotePs(value)}`)
+            // psTxt.push(`set ${name}=${singleQuotePs(value)}`)
+            psTxt.push(`set ${name}=${value}`)
         }
         await writeFile(fnameSetMsvcEnv, psTxt.join(OS.EOL))
     }

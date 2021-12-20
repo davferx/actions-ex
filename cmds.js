@@ -5276,9 +5276,6 @@ var import_os = __toESM(require("os"));
 var fnameSetMsvcEnv = "set-msvc-env.cmd";
 function ignore() {
 }
-function singleQuotePs(s) {
-  return "'" + s.replace(/'/g, "''") + "'";
-}
 var commands = {
   bare() {
     this.clean();
@@ -5291,6 +5288,10 @@ var commands = {
     (0, import_promises.unlink)("cmds.js.map").catch(ignore);
     (0, import_promises.unlink)(".pnpm-debug.log").catch(ignore);
     (0, import_promises.unlink)(".ninja_log").catch(ignore);
+  },
+  rebuild() {
+    this.bare();
+    (0, import_child_process.spawnSync)("cmd.exe", ["ninja.exe"], { stdio: "inherit" });
   },
   createMsvcScript() {
     return __async(this, null, function* () {
@@ -5322,7 +5323,7 @@ var commands = {
         const value = str.slice(i + 1);
         if (i === -1 || name.startsWith("__") || process.env[name] === value)
           continue;
-        psTxt.push(`set ${name}=${singleQuotePs(value)}`);
+        psTxt.push(`set ${name}=${value}`);
       }
       yield (0, import_promises.writeFile)(fnameSetMsvcEnv, psTxt.join(import_os.default.EOL));
     });
