@@ -1,0 +1,21 @@
+rule DoCmd
+  command = $CMD
+  description = $DESC
+
+globalName = xyzzy
+
+build one: DoCmd
+    CMD = echo do cmd one
+    DESC = describing command one
+
+build two: DoCmd
+    XONE = this is one
+    XTWO = this is two
+    CMD = echo $XONE and $XTWO also $globalName
+    DESC = describing command TWO
+
+build three: phony two
+    XONE = this is one
+    XTWO = this is two
+    CMD = echo $XONE and $XTWO also $globalName
+    DESC = describing command TWO
