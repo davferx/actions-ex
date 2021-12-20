@@ -9,6 +9,6 @@ include_directories(${MY_INCLUDE_DIRECTORIES})
 set(MY_LINK_DIRECTORIES $ENV{LIB} CACHE PATH "Default link directories")
 link_directories(${MY_LINK_DIRECTORIES})
 
-# add_compile_options()
+# add_compile_options()x
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4 /Wall /WX /GR /EHscr /permissive-")
 add_subdirectory(app)

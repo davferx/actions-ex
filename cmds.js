@@ -5273,7 +5273,7 @@ var import_child_process = __toESM(require("child_process"));
 var import_fast_glob = __toESM(require_out4());
 var import_promises = __toESM(require("fs/promises"));
 var import_os = __toESM(require("os"));
-var fnameSetMsvcEnv = "set-msvc-env.ps1";
+var fnameSetMsvcEnv = "set-msvc-env.cmd";
 function ignore() {
 }
 function singleQuotePs(s) {
@@ -5290,7 +5290,7 @@ var commands = {
   clean() {
     (0, import_promises.unlink)("cmds.js.map").catch(ignore);
     (0, import_promises.unlink)(".pnpm-debug.log").catch(ignore);
-    (0, import_promises.unlink)(".ninja-log").catch(ignore);
+    (0, import_promises.unlink)(".ninja_log").catch(ignore);
   },
   createMsvcScript() {
     return __async(this, null, function* () {
@@ -5314,7 +5314,7 @@ var commands = {
         return;
       const cmd = `"${bestName}" -no_logo -arch=amd64 -host_arch=amd64 -app_platform=Desktop && set`;
       const envStrs = (0, import_child_process.execSync)(cmd, { stdio: ["inherit", "pipe", "inherit"], encoding: "utf8" }).split("\n");
-      let psTxt = [`SourceDir=_this_dir`, `BuildDir=_this_dir/build`];
+      let psTxt = [`@echo off`, `set SourceDir=_this_dir`, `set BuildDir=_this_dir/build`];
       for (let str of envStrs) {
         str = str.trim();
         const i = str.indexOf("=");
@@ -5322,7 +5322,7 @@ var commands = {
         const value = str.slice(i + 1);
         if (i === -1 || name.startsWith("__") || process.env[name] === value)
           continue;
-        psTxt.push(`$Env:${name} = ${singleQuotePs(value)}`);
+        psTxt.push(`set ${name}=${singleQuotePs(value)}`);
       }
       yield (0, import_promises.writeFile)(fnameSetMsvcEnv, psTxt.join(import_os.default.EOL));
     });
