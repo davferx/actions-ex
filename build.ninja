@@ -1,8 +1,7 @@
 rule DoCmd
   command = $CMD
-  description = $DESC
 
-ENV =cmd /c call build\set-msvc-env.cmd && cd
+ENV = cmd /c call build\set-msvc-env.cmd && cd
 
 build build\: DoCmd
     CMD = mkdir build
