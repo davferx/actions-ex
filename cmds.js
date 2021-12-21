@@ -5281,6 +5281,7 @@ var commands = {
     this.clean();
     (0, import_promises.rmdir)("cmds/node_modules", { recursive: true });
     (0, import_promises.rmdir)("build", { recursive: true });
+    (0, import_promises.rmdir)("artifacts", { recursive: true });
     (0, import_promises.unlink)("cmds/package-lock.json").catch(ignore);
     (0, import_promises.unlink)("cmds/pnpm-lock.yaml").catch(ignore);
   },
@@ -5291,7 +5292,7 @@ var commands = {
   },
   rebuild() {
     this.bare();
-    (0, import_child_process.spawnSync)("cmd.exe", ["ninja.exe"], { stdio: "inherit" });
+    (0, import_child_process.spawnSync)("cmd.exe", ["/c", "ninja.exe"], { stdio: "inherit" });
   },
   createMsvcScript() {
     return __async(this, null, function* () {

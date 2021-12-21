@@ -3,26 +3,42 @@ rule DoCmd
 
 ENV = cmd /c call build\set-msvc-env.cmd && cd
 
+#-- dirs -----------------------------------------------------------------------
 build build\: DoCmd
     CMD = mkdir build
 
-build build\set-msvc-env.cmd: DoCmd build\ CMakeLists.txt
+build artifacts\dbg\: DoCmd
+    CMD = mkdir artifacts\dbg
+
+build artifacts\rel\: DoCmd
+    CMD = mkdir artifacts\rel\
+
+build artifacts\logs\: DoCmd
+    CMD = mkdir artifacts\logs\
+
+build build\set-msvc-env.cmd: DoCmd build\
     CMD = cmd /c cd build && node ..\cmds.js createMsvcScript
 
-# dbg --------------------------------------------------------------------------
+#-- dbg ------------------------------------------------------------------------
 build build\dbg\build.ninja: DoCmd build\set-msvc-env.cmd
     CMD = $ENV . && cmake -G Ninja -B build\dbg -D CMAKE_BUILD_TYPE=Debug
 
 build build\dbg\app\app.exe: DoCmd build\dbg\build.ninja
     CMD = $ENV build\dbg && ninja --verbose
 
-# rel --------------------------------------------------------------------------
+#-- rel ------------------------------------------------------------------------
 build build\rel\build.ninja: DoCmd build\set-msvc-env.cmd
     CMD = $ENV . && cmake -G Ninja -B build\rel -D CMAKE_BUILD_TYPE=Release
 
 build build\rel\app\app.exe: DoCmd build\rel\build.ninja
     CMD = $ENV build\rel && ninja --verbose
 
+#-- artifacts ------------------------------------------------------------------
+build artifacts\dbg\app.exe: DoCmd artifacts\dbg\ build\dbg\app\app.exe
+    CMD = cmd /c copy /y build\dbg\app\app.exe artifacts\dbg\app.exe && copy /y build\dbg\app\app.pdb artifacts\dbg\app.pdb
+
+build artifacts\rel\app.exe: DoCmd artifacts\rel\ build\rel\app\app.exe
+    CMD = cmd /c copy /y build\rel\app\app.exe artifacts\rel\app.exe && copy /y build\rel\app\app.pdb artifacts\rel\app.pdb
 
 build clean: DoCmd
     CMD = node cmds.js clean
@@ -30,6 +46,6 @@ build clean: DoCmd
 build bare: DoCmd
     CMD = node cmds.js bare
 
-build all: phony build\dbg\app\app.exe build\rel\app\app.exe
+build all: phony artifacts\dbg\app.exe artifacts\rel\app.exe
 
 default all

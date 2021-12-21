@@ -1,6 +1,5 @@
 artifacts/
 build/
-logs/
 node_modules/
 
 .ninja_log

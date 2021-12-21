@@ -16,6 +16,7 @@ const commands = {
         this.clean()
         rmdir('cmds/node_modules', {recursive: true})
         rmdir('build', {recursive: true})
+        rmdir('artifacts', {recursive: true})
         unlink('cmds/package-lock.json').catch(ignore)
         unlink('cmds/pnpm-lock.yaml').catch(ignore)
     },
