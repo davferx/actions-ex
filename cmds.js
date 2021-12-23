@@ -5272,6 +5272,7 @@ var require_out4 = __commonJS({
 var import_child_process = require("child_process");
 var import_fast_glob = __toESM(require_out4());
 var import_promises = require("fs/promises");
+var import_path = __toESM(require("path"));
 var import_os = __toESM(require("os"));
 var fnameSetMsvcEnv = "build/set-msvc-env.cmd";
 function ignore() {
@@ -5297,8 +5298,11 @@ var commands = {
   },
   build() {
     return __async(this, null, function* () {
-      yield this.createDirs();
-      (0, import_child_process.spawnSync)("cmd.exe", ["/c", "ninja.exe", "-v", ">artifacts/logs/build.log"], { stdio: "inherit" });
+      const res = yield this.createSetMsvcEnv();
+      const tmp = yield (0, import_fast_glob.default)(import_fast_glob.default.escapePath(import_path.default.posix.normalize(res.bestName + "../../..")) + "/**/ninja.exe");
+      if (tmp[0])
+        process.env["path"] += `;${import_path.default.dirname(tmp[0])}`;
+      (0, import_child_process.spawnSync)("cmd.exe", ["/c", "ninja.exe", "-v", ">artifacts/build.log", "2>&1"], { stdio: "inherit" });
     });
   },
   rebuild() {
@@ -5309,7 +5313,7 @@ var commands = {
   },
   createDirs() {
     return __async(this, null, function* () {
-      const dirs = ["build/dbg", "build/rel", "artifacts/dbg", "artifacts/rel", "artifacts/logs"];
+      const dirs = ["build/dbg", "build/rel", "artifacts/dbg", "artifacts/rel"];
       const todo = dirs.map((x) => (0, import_promises.mkdir)(x, { recursive: true }).catch(ignore));
       yield Promise.all(todo);
     });
@@ -5342,12 +5346,13 @@ var commands = {
         str = str.trim();
         const i = str.indexOf("=");
         const name = str.slice(0, i);
-        const value = str.slice(i + 1);
+        let value = str.slice(i + 1);
         if (i === -1 || name.startsWith("__") || process.env[name] === value)
           continue;
         psTxt.push(`set ${name}=${value}`);
       }
       yield (0, import_promises.writeFile)(fnameSetMsvcEnv, psTxt.join(import_os.default.EOL));
+      return { bestName };
     });
   }
 };

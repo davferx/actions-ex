@@ -1,6 +1,7 @@
 import {execSync, spawnSync} from 'child_process'
 import FastGlob from 'fast-glob'
 import {rmdir, unlink, writeFile, mkdir} from 'fs/promises'
+import Path from 'path'
 import OS from 'os'
 
 const fnameSetMsvcEnv = 'build/set-msvc-env.cmd'
@@ -25,15 +26,17 @@ const commands = {
         await Promise.all(rmFiles(['cmds.js.map', '.pnpm-debug.log', '.ninja_log']))
     },
     async build() {
-        await this.createDirs()
-        spawnSync('cmd.exe', ['/c', 'ninja.exe', '-v', '>artifacts/logs/build.log'], {stdio: 'inherit'})
+        const res = await this.createSetMsvcEnv()
+        const tmp = await FastGlob(FastGlob.escapePath(Path.posix.normalize(res!.bestName + '../../..')) + '/**/ninja.exe')
+        if (tmp[0]) process.env['path'] += `;${Path.dirname(tmp[0])}`
+        spawnSync('cmd.exe', ['/c', 'ninja.exe', '-v', '>artifacts/build.log', '2>&1'], {stdio: 'inherit'})
     },
     async rebuild() {
         await Promise.all(rmDirs(['build', 'artifacts']))
         this.build()
     },
     async createDirs() {
-        const dirs = ['build/dbg', 'build/rel', 'artifacts/dbg', 'artifacts/rel', 'artifacts/logs']
+        const dirs = ['build/dbg', 'build/rel', 'artifacts/dbg', 'artifacts/rel']
         const todo = dirs.map(x => mkdir(x, {recursive: true}).catch(ignore))
         await Promise.all(todo)
     },
@@ -67,18 +70,18 @@ const commands = {
         const cmd = `"${bestName}" -no_logo -arch=amd64 -host_arch=amd64 -app_platform=Desktop && set`
         const envStrs = execSync(cmd, {stdio: ['inherit', 'pipe', 'inherit'], encoding: 'utf8'}).split('\n')
 
-        //- Build a list of the environment variable that are different and write them to a PS1 file
+        //- Build a list of the environment variable that are different and write them to a cmd file
         let psTxt: string[] = [`@echo off`, `set SourceDir=${process.cwd()}`, `set BuildDir=${process.cwd()}/build`]
         for (let str of envStrs) {
             str = str.trim()
             const i = str.indexOf('=')
             const name = str.slice(0, i)
-            const value = str.slice(i + 1)
+            let value = str.slice(i + 1)
             if (i === -1 || name.startsWith('__') || process.env[name] === value) continue
-            // psTxt.push(`set ${name}=${singleQuotePs(value)}`)
             psTxt.push(`set ${name}=${value}`)
         }
         await writeFile(fnameSetMsvcEnv, psTxt.join(OS.EOL))
+        return {bestName: bestName}
     }
 }
 
