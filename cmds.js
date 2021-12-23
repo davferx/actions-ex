@@ -5269,33 +5269,54 @@ var require_out4 = __commonJS({
 });
 
 // cmds.ts
-var import_child_process = __toESM(require("child_process"));
+var import_child_process = require("child_process");
 var import_fast_glob = __toESM(require_out4());
-var import_promises = __toESM(require("fs/promises"));
+var import_promises = require("fs/promises");
 var import_os = __toESM(require("os"));
-var fnameSetMsvcEnv = "set-msvc-env.cmd";
+var fnameSetMsvcEnv = "build/set-msvc-env.cmd";
 function ignore() {
+}
+function rmFiles(files) {
+  return files.map((x) => (0, import_promises.unlink)(x).catch(ignore));
+}
+function rmDirs(dirs) {
+  return dirs.map((x) => (0, import_promises.rmdir)(x, { recursive: true }).catch(ignore));
 }
 var commands = {
   bare() {
-    this.clean();
-    (0, import_promises.rmdir)("cmds/node_modules", { recursive: true });
-    (0, import_promises.rmdir)("build", { recursive: true });
-    (0, import_promises.rmdir)("artifacts", { recursive: true });
-    (0, import_promises.unlink)("cmds/package-lock.json").catch(ignore);
-    (0, import_promises.unlink)("cmds/pnpm-lock.yaml").catch(ignore);
+    return __async(this, null, function* () {
+      yield this.clean();
+      yield Promise.all(rmFiles(["cmds/package-lock.json", "cmds/pnpm-lock.yaml"]));
+      yield Promise.all(rmDirs(["cmds/node_modules", "build", "artifacts"]));
+    });
   },
   clean() {
-    (0, import_promises.unlink)("cmds.js.map").catch(ignore);
-    (0, import_promises.unlink)(".pnpm-debug.log").catch(ignore);
-    (0, import_promises.unlink)(".ninja_log").catch(ignore);
+    return __async(this, null, function* () {
+      yield Promise.all(rmFiles(["cmds.js.map", ".pnpm-debug.log", ".ninja_log"]));
+    });
+  },
+  build() {
+    return __async(this, null, function* () {
+      yield this.createDirs();
+      (0, import_child_process.spawnSync)("cmd.exe", ["/c", "ninja.exe", "-v", ">artifacts/logs/build.log"], { stdio: "inherit" });
+    });
   },
   rebuild() {
-    this.bare();
-    (0, import_child_process.spawnSync)("cmd.exe", ["/c", "ninja.exe"], { stdio: "inherit" });
-  },
-  createMsvcScript() {
     return __async(this, null, function* () {
+      yield Promise.all(rmDirs(["build", "artifacts"]));
+      this.build();
+    });
+  },
+  createDirs() {
+    return __async(this, null, function* () {
+      const dirs = ["build/dbg", "build/rel", "artifacts/dbg", "artifacts/rel", "artifacts/logs"];
+      const todo = dirs.map((x) => (0, import_promises.mkdir)(x, { recursive: true }).catch(ignore));
+      yield Promise.all(todo);
+    });
+  },
+  createSetMsvcEnv() {
+    return __async(this, null, function* () {
+      this.createDirs();
       let bestVer = 0;
       let bestName = "";
       const search = [];
@@ -5316,7 +5337,7 @@ var commands = {
         return;
       const cmd = `"${bestName}" -no_logo -arch=amd64 -host_arch=amd64 -app_platform=Desktop && set`;
       const envStrs = (0, import_child_process.execSync)(cmd, { stdio: ["inherit", "pipe", "inherit"], encoding: "utf8" }).split("\n");
-      let psTxt = [`@echo off`, `set SourceDir=_this_dir`, `set BuildDir=_this_dir/build`];
+      let psTxt = [`@echo off`, `set SourceDir=${process.cwd()}`, `set BuildDir=${process.cwd()}/build`];
       for (let str of envStrs) {
         str = str.trim();
         const i = str.indexOf("=");

@@ -4,3 +4,4 @@ node_modules/
 
 .ninja_log
 cmds.js.map
+build.log

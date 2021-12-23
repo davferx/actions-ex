@@ -1,36 +1,45 @@
-import {execSync,spawnSync} from 'child_process'
+import {execSync, spawnSync} from 'child_process'
 import FastGlob from 'fast-glob'
-import {rmdir, unlink, writeFile} from 'fs/promises'
+import {rmdir, unlink, writeFile, mkdir} from 'fs/promises'
 import OS from 'os'
 
-const fnameSetMsvcEnv = 'set-msvc-env.cmd'
+const fnameSetMsvcEnv = 'build/set-msvc-env.cmd'
 
 function ignore() {}
 
-// function singleQuotePs(s: string) {
-//     return "'" + s.replace(/'/g, "''") + "'"
-// }
+function rmFiles(files: string[]) {
+    return files.map(x => unlink(x).catch(ignore))
+}
+
+function rmDirs(dirs: string[]) {
+    return dirs.map(x => rmdir(x, {recursive: true}).catch(ignore))
+}
 
 const commands = {
-    bare() {
-        this.clean()
-        rmdir('cmds/node_modules', {recursive: true})
-        rmdir('build', {recursive: true})
-        rmdir('artifacts', {recursive: true})
-        unlink('cmds/package-lock.json').catch(ignore)
-        unlink('cmds/pnpm-lock.yaml').catch(ignore)
+    async bare() {
+        await this.clean()
+        await Promise.all(rmFiles(['cmds/package-lock.json', 'cmds/pnpm-lock.yaml']))
+        await Promise.all(rmDirs(['cmds/node_modules', 'build', 'artifacts']))
     },
-    clean() {
-        unlink('cmds.js.map').catch(ignore)
-        unlink('.pnpm-debug.log').catch(ignore)
-        unlink('.ninja_log').catch(ignore)
+    async clean() {
+        await Promise.all(rmFiles(['cmds.js.map', '.pnpm-debug.log', '.ninja_log']))
     },
-    rebuild() {
-        this.bare()
-        spawnSync('cmd.exe', ['/c', 'ninja.exe'], {stdio: 'inherit'})
+    async build() {
+        await this.createDirs()
+        spawnSync('cmd.exe', ['/c', 'ninja.exe', '-v', '>artifacts/logs/build.log'], {stdio: 'inherit'})
     },
+    async rebuild() {
+        await Promise.all(rmDirs(['build', 'artifacts']))
+        this.build()
+    },
+    async createDirs() {
+        const dirs = ['build/dbg', 'build/rel', 'artifacts/dbg', 'artifacts/rel', 'artifacts/logs']
+        const todo = dirs.map(x => mkdir(x, {recursive: true}).catch(ignore))
+        await Promise.all(todo)
+    },
+    async createSetMsvcEnv() {
+        this.createDirs()
 
-    async createMsvcScript() {
         //- Find the latest version of VsDevCmd.bat
         let bestVer = 0
         let bestName = ''
@@ -59,7 +68,7 @@ const commands = {
         const envStrs = execSync(cmd, {stdio: ['inherit', 'pipe', 'inherit'], encoding: 'utf8'}).split('\n')
 
         //- Build a list of the environment variable that are different and write them to a PS1 file
-        let psTxt: string[] = [`@echo off`, `set SourceDir=_this_dir`, `set BuildDir=_this_dir/build`]
+        let psTxt: string[] = [`@echo off`, `set SourceDir=${process.cwd()}`, `set BuildDir=${process.cwd()}/build`]
         for (let str of envStrs) {
             str = str.trim()
             const i = str.indexOf('=')
