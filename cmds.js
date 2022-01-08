@@ -5307,7 +5307,7 @@ var commands = {
   updateFile() {
     return __async(this, null, function* () {
       var _a;
-      const dir = `${process.env["HOMEPATH"]}/ctest`;
+      const dir = `${process.env["USERPROFILE"]}/ctest`;
       const fname = `${dir}/number.txt`;
       console.log(`This is the file [${fname}]`);
       const txt = (_a = yield (0, import_promises.readFile)(fname, { encoding: "utf8" }).catch(ignore)) != null ? _a : "";

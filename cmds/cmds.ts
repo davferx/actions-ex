@@ -18,7 +18,7 @@ function rmDirs(dirs: string[]) {
 
 const commands = {
     async updateFile() {
-        const dir = `${process.env['HOMEPATH']}/ctest`
+        const dir = `${process.env['USERPROFILE']}/ctest`
         const fname = `${dir}/number.txt`
         console.log(`This is the file [${fname}]`)
         const txt = (await readFile(fname, {encoding: 'utf8'}).catch(ignore)) ?? ''

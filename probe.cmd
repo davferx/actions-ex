@@ -8,8 +8,12 @@
     vcpkg version
 
     echo on
-    dir "%HOMEPATH%"
-    mkdir "%HOMEPATH%\ctest"
-    dir "%HOMEPATH%"
+    echo ------------------------------
+    dir "%USERPROFILE%"
+    echo ------------------------------
+    mkdir "%USERPROFILE%\ctest"
+    echo ------------------------------
+    dir "%USERPROFILE%"
+    echo ------------------------------
 
     set >artifacts\set.txt
