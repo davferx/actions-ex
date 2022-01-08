@@ -3,3 +3,5 @@
     echo You are running the probe.cmd script
 
     dir "%USERPROFILE%\ctest"
+    echo two
+    
