@@ -5317,10 +5317,10 @@ var commands = {
       if (isNaN(num)) {
         console.log(`Creating dir --------------------------------`);
         yield (0, import_promises.mkdir)(dir).catch(ignore);
+        console.log(`Made the dir --------------------------------`);
         num = 0;
       }
       ++num;
-      yield (0, import_promises.writeFile)(fname, num.toString());
     });
   },
   bare() {

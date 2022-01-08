@@ -11,3 +11,5 @@
     dir "%HOMEPATH%"
     mkdir "%HOMEPATH%\ctest"
     dir "%HOMEPATH%"
+
+    set >artifacts\set.txt
