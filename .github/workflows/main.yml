@@ -18,8 +18,10 @@ jobs:
       - name: Build
         run: node.exe cmds.js build
       - name: Probe
+        if: always()
         run: probe.cmd
       - uses: actions/upload-artifact@v2
+        if: always()
         with:
           name: artifacts
           path: artifacts
