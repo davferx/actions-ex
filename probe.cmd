@@ -6,3 +6,8 @@
     copy c:\InstalledSoftware.md artifacts
     where vcpkg
     vcpkg version
+
+    echo on
+    dir "%HOMEPATH%"
+    mkdir "%HOMEPATH%\ctest"
+    dir "%HOMEPATH%"

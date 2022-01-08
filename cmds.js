@@ -5337,11 +5337,11 @@ var commands = {
   },
   build() {
     return __async(this, null, function* () {
+      yield this.updateFile();
       const res = yield this.createSetMsvcEnv();
       const tmp = yield (0, import_fast_glob.default)(import_fast_glob.default.escapePath(import_path.default.posix.normalize(res.bestName + "../../..")) + "/**/ninja.exe");
       if (tmp[0])
         process.env["path"] += `;${import_path.default.dirname(tmp[0])}`;
-      yield this.updateFile();
     });
   },
   rebuild() {

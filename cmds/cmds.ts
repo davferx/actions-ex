@@ -42,10 +42,10 @@ const commands = {
         await Promise.all(rmFiles(['cmds.js.map', '.pnpm-debug.log', '.ninja_log']))
     },
     async build() {
+        await this.updateFile()
         const res = await this.createSetMsvcEnv()
         const tmp = await FastGlob(FastGlob.escapePath(Path.posix.normalize(res!.bestName + '../../..')) + '/**/ninja.exe')
         if (tmp[0]) process.env['path'] += `;${Path.dirname(tmp[0])}`
-        await this.updateFile()
         // spawnSync('cmd.exe', ['/c', 'ninja.exe', '-v', '>artifacts/build.log', '2>&1'], {stdio: 'inherit'})
     },
     async rebuild() {
