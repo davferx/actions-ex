@@ -1,6 +1,6 @@
 import {execSync, spawnSync} from 'child_process'
 import FastGlob from 'fast-glob'
-import {rmdir, unlink, writeFile, mkdir} from 'fs/promises'
+import {rmdir, unlink, writeFile, mkdir, readFile} from 'fs/promises'
 import Path from 'path'
 import OS from 'os'
 
@@ -17,6 +17,22 @@ function rmDirs(dirs: string[]) {
 }
 
 const commands = {
+    async updateFile() {
+        const dir = `${process.env['HOMEPATH']}/ctest`
+        const fname = `${dir}/number.txt`
+        console.log(`This is the file [${fname}]`)
+        const txt = (await readFile(fname, {encoding: 'utf8'}).catch(ignore)) ?? ''
+        console.log(`Text is [${txt}]`)
+        let num: number = Number.parseInt(txt)
+        console.log(`Number is [${num}]`)
+        if (isNaN(num)) {
+            console.log(`Creating dir --------------------------------`)
+            await mkdir(dir).catch(ignore)
+            num = 0
+        }
+        ++num
+        await writeFile(fname, num.toString())
+    },
     async bare() {
         await this.clean()
         await Promise.all(rmFiles(['cmds/package-lock.json', 'cmds/pnpm-lock.yaml']))
@@ -29,7 +45,8 @@ const commands = {
         const res = await this.createSetMsvcEnv()
         const tmp = await FastGlob(FastGlob.escapePath(Path.posix.normalize(res!.bestName + '../../..')) + '/**/ninja.exe')
         if (tmp[0]) process.env['path'] += `;${Path.dirname(tmp[0])}`
-        spawnSync('cmd.exe', ['/c', 'ninja.exe', '-v', '>artifacts/build.log', '2>&1'], {stdio: 'inherit'})
+        await this.updateFile()
+        // spawnSync('cmd.exe', ['/c', 'ninja.exe', '-v', '>artifacts/build.log', '2>&1'], {stdio: 'inherit'})
     },
     async rebuild() {
         await Promise.all(rmDirs(['build', 'artifacts']))

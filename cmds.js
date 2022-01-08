@@ -57,9 +57,9 @@ var __async = (__this, __arguments, generator) => {
   });
 };
 
-// node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/utils/array.js
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/utils/array.js
 var require_array = __commonJS({
-  "node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/utils/array.js"(exports) {
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/utils/array.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.splitWhen = exports.flatten = void 0;
@@ -84,9 +84,9 @@ var require_array = __commonJS({
   }
 });
 
-// node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/utils/errno.js
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/utils/errno.js
 var require_errno = __commonJS({
-  "node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/utils/errno.js"(exports) {
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/utils/errno.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.isEnoentCodeError = void 0;
@@ -97,9 +97,9 @@ var require_errno = __commonJS({
   }
 });
 
-// node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/utils/fs.js
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/utils/fs.js
 var require_fs = __commonJS({
-  "node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/utils/fs.js"(exports) {
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/utils/fs.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.createDirentFromStats = void 0;
@@ -122,9 +122,9 @@ var require_fs = __commonJS({
   }
 });
 
-// node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/utils/path.js
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/utils/path.js
 var require_path = __commonJS({
-  "node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/utils/path.js"(exports) {
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/utils/path.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.removeLeadingDotSegment = exports.escape = exports.makeAbsolute = exports.unixify = void 0;
@@ -1380,9 +1380,9 @@ var require_braces = __commonJS({
   }
 });
 
-// node_modules/.pnpm/picomatch@2.3.0/node_modules/picomatch/lib/constants.js
+// node_modules/.pnpm/picomatch@2.3.1/node_modules/picomatch/lib/constants.js
 var require_constants2 = __commonJS({
-  "node_modules/.pnpm/picomatch@2.3.0/node_modules/picomatch/lib/constants.js"(exports, module2) {
+  "node_modules/.pnpm/picomatch@2.3.1/node_modules/picomatch/lib/constants.js"(exports, module2) {
     "use strict";
     var path = require("path");
     var WIN_SLASH = "\\\\/";
@@ -1522,9 +1522,9 @@ var require_constants2 = __commonJS({
   }
 });
 
-// node_modules/.pnpm/picomatch@2.3.0/node_modules/picomatch/lib/utils.js
+// node_modules/.pnpm/picomatch@2.3.1/node_modules/picomatch/lib/utils.js
 var require_utils2 = __commonJS({
-  "node_modules/.pnpm/picomatch@2.3.0/node_modules/picomatch/lib/utils.js"(exports) {
+  "node_modules/.pnpm/picomatch@2.3.1/node_modules/picomatch/lib/utils.js"(exports) {
     "use strict";
     var path = require("path");
     var win32 = process.platform === "win32";
@@ -1585,9 +1585,9 @@ var require_utils2 = __commonJS({
   }
 });
 
-// node_modules/.pnpm/picomatch@2.3.0/node_modules/picomatch/lib/scan.js
+// node_modules/.pnpm/picomatch@2.3.1/node_modules/picomatch/lib/scan.js
 var require_scan = __commonJS({
-  "node_modules/.pnpm/picomatch@2.3.0/node_modules/picomatch/lib/scan.js"(exports, module2) {
+  "node_modules/.pnpm/picomatch@2.3.1/node_modules/picomatch/lib/scan.js"(exports, module2) {
     "use strict";
     var utils = require_utils2();
     var {
@@ -1903,9 +1903,9 @@ var require_scan = __commonJS({
   }
 });
 
-// node_modules/.pnpm/picomatch@2.3.0/node_modules/picomatch/lib/parse.js
+// node_modules/.pnpm/picomatch@2.3.1/node_modules/picomatch/lib/parse.js
 var require_parse2 = __commonJS({
-  "node_modules/.pnpm/picomatch@2.3.0/node_modules/picomatch/lib/parse.js"(exports, module2) {
+  "node_modules/.pnpm/picomatch@2.3.1/node_modules/picomatch/lib/parse.js"(exports, module2) {
     "use strict";
     var constants = require_constants2();
     var utils = require_utils2();
@@ -2082,7 +2082,8 @@ var require_parse2 = __commonJS({
             output = token.close = `)$))${extglobStar}`;
           }
           if (token.inner.includes("*") && (rest = remaining()) && /^\.[^\\/.]+$/.test(rest)) {
-            output = token.close = `)${rest})${extglobStar})`;
+            const expression = parse(rest, __spreadProps(__spreadValues({}, options), { fastpaths: false })).output;
+            output = token.close = `)${expression})${extglobStar})`;
           }
           if (token.prev.type === "bos") {
             state.negatedExtglob = true;
@@ -2683,9 +2684,9 @@ var require_parse2 = __commonJS({
   }
 });
 
-// node_modules/.pnpm/picomatch@2.3.0/node_modules/picomatch/lib/picomatch.js
+// node_modules/.pnpm/picomatch@2.3.1/node_modules/picomatch/lib/picomatch.js
 var require_picomatch = __commonJS({
-  "node_modules/.pnpm/picomatch@2.3.0/node_modules/picomatch/lib/picomatch.js"(exports, module2) {
+  "node_modules/.pnpm/picomatch@2.3.1/node_modules/picomatch/lib/picomatch.js"(exports, module2) {
     "use strict";
     var path = require("path");
     var scan = require_scan();
@@ -2827,9 +2828,9 @@ var require_picomatch = __commonJS({
   }
 });
 
-// node_modules/.pnpm/picomatch@2.3.0/node_modules/picomatch/index.js
+// node_modules/.pnpm/picomatch@2.3.1/node_modules/picomatch/index.js
 var require_picomatch2 = __commonJS({
-  "node_modules/.pnpm/picomatch@2.3.0/node_modules/picomatch/index.js"(exports, module2) {
+  "node_modules/.pnpm/picomatch@2.3.1/node_modules/picomatch/index.js"(exports, module2) {
     "use strict";
     module2.exports = require_picomatch();
   }
@@ -2997,9 +2998,9 @@ var require_micromatch = __commonJS({
   }
 });
 
-// node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/utils/pattern.js
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/utils/pattern.js
 var require_pattern = __commonJS({
-  "node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/utils/pattern.js"(exports) {
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/utils/pattern.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.matchAny = exports.convertPatternsToRe = exports.makeRe = exports.getPatternParts = exports.expandBraceExpansion = exports.expandPatternsWithBraceExpansion = exports.isAffectDepthOfReadingPattern = exports.endsWithSlashGlobStar = exports.hasGlobStar = exports.getBaseDirectory = exports.isPatternRelatedToParentDirectory = exports.getPatternsOutsideCurrentDirectory = exports.getPatternsInsideCurrentDirectory = exports.getPositivePatterns = exports.getNegativePatterns = exports.isPositivePattern = exports.isNegativePattern = exports.convertToNegativePattern = exports.convertToPositivePattern = exports.isDynamicPattern = exports.isStaticPattern = void 0;
@@ -3009,10 +3010,10 @@ var require_pattern = __commonJS({
     var GLOBSTAR = "**";
     var ESCAPE_SYMBOL = "\\";
     var COMMON_GLOB_SYMBOLS_RE = /[*?]|^!/;
-    var REGEX_CHARACTER_CLASS_SYMBOLS_RE = /\[.*]/;
-    var REGEX_GROUP_SYMBOLS_RE = /(?:^|[^!*+?@])\(.*\|.*\)/;
-    var GLOB_EXTENSION_SYMBOLS_RE = /[!*+?@]\(.*\)/;
-    var BRACE_EXPANSIONS_SYMBOLS_RE = /{.*(?:,|\.\.).*}/;
+    var REGEX_CHARACTER_CLASS_SYMBOLS_RE = /\[[^[]*]/;
+    var REGEX_GROUP_SYMBOLS_RE = /(?:^|[^!*+?@])\([^(]*\|[^|]*\)/;
+    var GLOB_EXTENSION_SYMBOLS_RE = /[!*+?@]\([^(]*\)/;
+    var BRACE_EXPANSIONS_SYMBOLS_RE = /{[^,.{]*(?:,|\.\.)[^,.{]*}/;
     function isStaticPattern(pattern, options = {}) {
       return !isDynamicPattern(pattern, options);
     }
@@ -3248,9 +3249,9 @@ var require_merge2 = __commonJS({
   }
 });
 
-// node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/utils/stream.js
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/utils/stream.js
 var require_stream = __commonJS({
-  "node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/utils/stream.js"(exports) {
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/utils/stream.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.merge = void 0;
@@ -3271,9 +3272,9 @@ var require_stream = __commonJS({
   }
 });
 
-// node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/utils/string.js
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/utils/string.js
 var require_string = __commonJS({
-  "node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/utils/string.js"(exports) {
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/utils/string.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.isEmpty = exports.isString = void 0;
@@ -3288,9 +3289,9 @@ var require_string = __commonJS({
   }
 });
 
-// node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/utils/index.js
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/utils/index.js
 var require_utils3 = __commonJS({
-  "node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/utils/index.js"(exports) {
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/utils/index.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.string = exports.stream = exports.pattern = exports.path = exports.fs = exports.errno = exports.array = void 0;
@@ -3311,9 +3312,9 @@ var require_utils3 = __commonJS({
   }
 });
 
-// node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/managers/tasks.js
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/managers/tasks.js
 var require_tasks = __commonJS({
-  "node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/managers/tasks.js"(exports) {
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/managers/tasks.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.convertPatternGroupToTask = exports.convertPatternGroupsToTasks = exports.groupPatternsByBaseDirectory = exports.getNegativePatternsAsPositive = exports.getPositivePatterns = exports.convertPatternsToTasks = exports.generate = void 0;
@@ -3382,6 +3383,24 @@ var require_tasks = __commonJS({
       };
     }
     exports.convertPatternGroupToTask = convertPatternGroupToTask;
+  }
+});
+
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/managers/patterns.js
+var require_patterns = __commonJS({
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/managers/patterns.js"(exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.removeDuplicateSlashes = exports.transform = void 0;
+    var DOUBLE_SLASH_RE = /(?!^)\/{2,}/g;
+    function transform(patterns) {
+      return patterns.map((pattern) => removeDuplicateSlashes(pattern));
+    }
+    exports.transform = transform;
+    function removeDuplicateSlashes(pattern) {
+      return pattern.replace(DOUBLE_SLASH_RE, "/");
+    }
+    exports.removeDuplicateSlashes = removeDuplicateSlashes;
   }
 });
 
@@ -4577,9 +4596,9 @@ var require_out3 = __commonJS({
   }
 });
 
-// node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/readers/reader.js
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/readers/reader.js
 var require_reader2 = __commonJS({
-  "node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/readers/reader.js"(exports) {
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/readers/reader.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var path = require("path");
@@ -4616,9 +4635,9 @@ var require_reader2 = __commonJS({
   }
 });
 
-// node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/readers/stream.js
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/readers/stream.js
 var require_stream3 = __commonJS({
-  "node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/readers/stream.js"(exports) {
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/readers/stream.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var stream_1 = require("stream");
@@ -4673,9 +4692,9 @@ var require_stream3 = __commonJS({
   }
 });
 
-// node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/providers/matchers/matcher.js
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/providers/matchers/matcher.js
 var require_matcher = __commonJS({
-  "node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/providers/matchers/matcher.js"(exports) {
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/providers/matchers/matcher.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var utils = require_utils3();
@@ -4725,9 +4744,9 @@ var require_matcher = __commonJS({
   }
 });
 
-// node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/providers/matchers/partial.js
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/providers/matchers/partial.js
 var require_partial = __commonJS({
-  "node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/providers/matchers/partial.js"(exports) {
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/providers/matchers/partial.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var matcher_1 = require_matcher();
@@ -4762,9 +4781,9 @@ var require_partial = __commonJS({
   }
 });
 
-// node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/providers/filters/deep.js
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/providers/filters/deep.js
 var require_deep = __commonJS({
-  "node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/providers/filters/deep.js"(exports) {
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/providers/filters/deep.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var utils = require_utils3();
@@ -4827,9 +4846,9 @@ var require_deep = __commonJS({
   }
 });
 
-// node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/providers/filters/entry.js
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/providers/filters/entry.js
 var require_entry = __commonJS({
-  "node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/providers/filters/entry.js"(exports) {
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/providers/filters/entry.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var utils = require_utils3();
@@ -4882,16 +4901,16 @@ var require_entry = __commonJS({
       }
       _isMatchToPatterns(entryPath, patternsRe) {
         const filepath = utils.path.removeLeadingDotSegment(entryPath);
-        return utils.pattern.matchAny(filepath, patternsRe);
+        return utils.pattern.matchAny(filepath, patternsRe) || utils.pattern.matchAny(filepath + "/", patternsRe);
       }
     };
     exports.default = EntryFilter;
   }
 });
 
-// node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/providers/filters/error.js
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/providers/filters/error.js
 var require_error = __commonJS({
-  "node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/providers/filters/error.js"(exports) {
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/providers/filters/error.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var utils = require_utils3();
@@ -4910,9 +4929,9 @@ var require_error = __commonJS({
   }
 });
 
-// node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/providers/transformers/entry.js
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/providers/transformers/entry.js
 var require_entry2 = __commonJS({
-  "node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/providers/transformers/entry.js"(exports) {
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/providers/transformers/entry.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var utils = require_utils3();
@@ -4942,9 +4961,9 @@ var require_entry2 = __commonJS({
   }
 });
 
-// node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/providers/provider.js
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/providers/provider.js
 var require_provider = __commonJS({
-  "node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/providers/provider.js"(exports) {
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/providers/provider.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var path = require("path");
@@ -4996,9 +5015,9 @@ var require_provider = __commonJS({
   }
 });
 
-// node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/providers/async.js
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/providers/async.js
 var require_async5 = __commonJS({
-  "node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/providers/async.js"(exports) {
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/providers/async.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var stream_1 = require_stream3();
@@ -5030,9 +5049,9 @@ var require_async5 = __commonJS({
   }
 });
 
-// node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/providers/stream.js
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/providers/stream.js
 var require_stream4 = __commonJS({
-  "node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/providers/stream.js"(exports) {
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/providers/stream.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var stream_1 = require("stream");
@@ -5064,9 +5083,9 @@ var require_stream4 = __commonJS({
   }
 });
 
-// node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/readers/sync.js
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/readers/sync.js
 var require_sync5 = __commonJS({
-  "node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/readers/sync.js"(exports) {
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/readers/sync.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var fsStat = require_out();
@@ -5112,9 +5131,9 @@ var require_sync5 = __commonJS({
   }
 });
 
-// node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/providers/sync.js
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/providers/sync.js
 var require_sync6 = __commonJS({
-  "node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/providers/sync.js"(exports) {
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/providers/sync.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var sync_1 = require_sync5();
@@ -5141,9 +5160,9 @@ var require_sync6 = __commonJS({
   }
 });
 
-// node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/settings.js
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/settings.js
 var require_settings4 = __commonJS({
-  "node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/settings.js"(exports) {
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/settings.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.DEFAULT_FILE_SYSTEM_ADAPTER = void 0;
@@ -5200,11 +5219,12 @@ var require_settings4 = __commonJS({
   }
 });
 
-// node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/index.js
+// node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/index.js
 var require_out4 = __commonJS({
-  "node_modules/.pnpm/fast-glob@3.2.7/node_modules/fast-glob/out/index.js"(exports, module2) {
+  "node_modules/.pnpm/fast-glob@3.2.9/node_modules/fast-glob/out/index.js"(exports, module2) {
     "use strict";
     var taskManager = require_tasks();
+    var patternManager = require_patterns();
     var async_1 = require_async5();
     var stream_1 = require_stream4();
     var sync_1 = require_sync6();
@@ -5233,7 +5253,7 @@ var require_out4 = __commonJS({
       FastGlob3.stream = stream;
       function generateTasks(source, options) {
         assertPatternsInput(source);
-        const patterns = [].concat(source);
+        const patterns = patternManager.transform([].concat(source));
         const settings = new settings_1.default(options);
         return taskManager.generate(patterns, settings);
       }
@@ -5251,7 +5271,7 @@ var require_out4 = __commonJS({
       FastGlob3.escapePath = escapePath;
     })(FastGlob2 || (FastGlob2 = {}));
     function getWorks(source, _Provider, options) {
-      const patterns = [].concat(source);
+      const patterns = patternManager.transform([].concat(source));
       const settings = new settings_1.default(options);
       const tasks = taskManager.generate(patterns, settings);
       const provider = new _Provider(settings);
@@ -5284,6 +5304,25 @@ function rmDirs(dirs) {
   return dirs.map((x) => (0, import_promises.rmdir)(x, { recursive: true }).catch(ignore));
 }
 var commands = {
+  updateFile() {
+    return __async(this, null, function* () {
+      var _a;
+      const dir = `${process.env["HOMEPATH"]}/ctest`;
+      const fname = `${dir}/number.txt`;
+      console.log(`This is the file [${fname}]`);
+      const txt = (_a = yield (0, import_promises.readFile)(fname, { encoding: "utf8" }).catch(ignore)) != null ? _a : "";
+      console.log(`Text is [${txt}]`);
+      let num = Number.parseInt(txt);
+      console.log(`Number is [${num}]`);
+      if (isNaN(num)) {
+        console.log(`Creating dir --------------------------------`);
+        yield (0, import_promises.mkdir)(dir).catch(ignore);
+        num = 0;
+      }
+      ++num;
+      yield (0, import_promises.writeFile)(fname, num.toString());
+    });
+  },
   bare() {
     return __async(this, null, function* () {
       yield this.clean();
@@ -5302,7 +5341,7 @@ var commands = {
       const tmp = yield (0, import_fast_glob.default)(import_fast_glob.default.escapePath(import_path.default.posix.normalize(res.bestName + "../../..")) + "/**/ninja.exe");
       if (tmp[0])
         process.env["path"] += `;${import_path.default.dirname(tmp[0])}`;
-      (0, import_child_process.spawnSync)("cmd.exe", ["/c", "ninja.exe", "-v", ">artifacts/build.log", "2>&1"], { stdio: "inherit" });
+      yield this.updateFile();
     });
   },
   rebuild() {
