@@ -20,9 +20,12 @@ jobs:
           path: |
             ~/ctest
             ~/ctest2
+      - name: Probe1
+        if: always()
+        run: probe.cmd
       - name: Build
         run: node.exe cmds.js build
-      - name: Probe
+      - name: Probe2
         if: always()
         run: probe.cmd
       - uses: actions/upload-artifact@v2
