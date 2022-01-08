@@ -16,4 +16,6 @@
     dir "%USERPROFILE%"
     echo ------------------------------
 
+    dir "%USERPROFILE%\AppData\Local\vcpkg" /s/b >artifacts\vcpkg-stuff.txt
+
     set >artifacts\set.txt

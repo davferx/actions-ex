@@ -1,6 +1,5 @@
-# https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions
+# https://docs.github.com/en/actions
 # https://github.com/orgs/actions/repositories?q=&type=all&language=&sort=name
-# x
 
 name: main
 
@@ -15,6 +14,12 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          key: a20220108
+          path: |
+            ~/ctest
+            ~/ctest2
       - name: Build
         run: node.exe cmds.js build
       - name: Probe

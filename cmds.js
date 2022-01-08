@@ -5321,6 +5321,7 @@ var commands = {
         num = 0;
       }
       ++num;
+      yield (0, import_promises.writeFile)(fname, num.toString());
     });
   },
   bare() {

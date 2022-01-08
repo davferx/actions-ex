@@ -32,7 +32,7 @@ const commands = {
             num = 0
         }
         ++num
-        // await writeFile(fname, num.toString())
+        await writeFile(fname, num.toString())
     },
     async bare() {
         await this.clean()
