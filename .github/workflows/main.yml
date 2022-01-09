@@ -16,18 +16,12 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
         with:
-          key: a20220108
+          key: 220109a
           path: |
-            ~/ctest
-            ~/ctest2
-      - name: Probe1
-        if: always()
-        run: probe.cmd
+            ~/AppData/Local/vcpkg
+            ./build/cache
       - name: Build
         run: node.exe cmds.js build
-      - name: Probe2
-        if: always()
-        run: probe.cmd
       - uses: actions/upload-artifact@v2
         if: always()
         with:

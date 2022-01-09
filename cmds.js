@@ -5292,9 +5292,8 @@ var require_out4 = __commonJS({
 var import_child_process = require("child_process");
 var import_fast_glob = __toESM(require_out4());
 var import_promises = require("fs/promises");
-var import_path = __toESM(require("path"));
 var import_os = __toESM(require("os"));
-var fnameSetMsvcEnv = "build/set-msvc-env.cmd";
+var fnameSetMsvcEnv = "build/cache/set-msvc-env.cmd";
 function ignore() {
 }
 function rmFiles(files) {
@@ -5304,31 +5303,11 @@ function rmDirs(dirs) {
   return dirs.map((x) => (0, import_promises.rmdir)(x, { recursive: true }).catch(ignore));
 }
 var commands = {
-  updateFile() {
-    return __async(this, null, function* () {
-      var _a;
-      const dir = `${process.env["USERPROFILE"]}/ctest`;
-      const fname = `${dir}/number.txt`;
-      console.log(`This is the file [${fname}]`);
-      const txt = (_a = yield (0, import_promises.readFile)(fname, { encoding: "utf8" }).catch(ignore)) != null ? _a : "";
-      console.log(`Text is [${txt}]`);
-      let num = Number.parseInt(txt);
-      console.log(`Number is [${num}]`);
-      if (isNaN(num)) {
-        console.log(`Creating dir --------------------------------`);
-        yield (0, import_promises.mkdir)(dir).catch(ignore);
-        console.log(`Made the dir --------------------------------`);
-        num = 0;
-      }
-      ++num;
-      yield (0, import_promises.writeFile)(fname, num.toString());
-    });
-  },
   bare() {
     return __async(this, null, function* () {
       yield this.clean();
       yield Promise.all(rmFiles(["cmds/package-lock.json", "cmds/pnpm-lock.yaml"]));
-      yield Promise.all(rmDirs(["cmds/node_modules", "build", "artifacts"]));
+      yield Promise.all(rmDirs(["cmds/node_modules", "build"]));
     });
   },
   clean() {
@@ -5338,29 +5317,26 @@ var commands = {
   },
   build() {
     return __async(this, null, function* () {
-      yield this.updateFile();
-      const res = yield this.createSetMsvcEnv();
-      const tmp = yield (0, import_fast_glob.default)(import_fast_glob.default.escapePath(import_path.default.posix.normalize(res.bestName + "../../..")) + "/**/ninja.exe");
-      if (tmp[0])
-        process.env["path"] += `;${import_path.default.dirname(tmp[0])}`;
+      yield this.createDirs();
+      yield this.ensureSetMsvcEnv();
+      (0, import_child_process.spawnSync)("cmd.exe", ["/c", `call ${fnameSetMsvcEnv} && ninja.exe -v >build/artifacts/build.log 2>&1`], { stdio: "inherit" });
     });
   },
   rebuild() {
     return __async(this, null, function* () {
-      yield Promise.all(rmDirs(["build", "artifacts"]));
-      this.build();
+      yield Promise.all(rmDirs(["build"]));
+      yield this.build();
     });
   },
   createDirs() {
     return __async(this, null, function* () {
-      const dirs = ["build/dbg", "build/rel", "artifacts/dbg", "artifacts/rel"];
+      const dirs = ["build/artifacts/dbg", "build/artifacts/rel", "build/cache", "build/dbg", "build/rel"];
       const todo = dirs.map((x) => (0, import_promises.mkdir)(x, { recursive: true }).catch(ignore));
       yield Promise.all(todo);
     });
   },
   createSetMsvcEnv() {
     return __async(this, null, function* () {
-      this.createDirs();
       let bestVer = 0;
       let bestName = "";
       const search = [];
@@ -5393,6 +5369,19 @@ var commands = {
       }
       yield (0, import_promises.writeFile)(fnameSetMsvcEnv, psTxt.join(import_os.default.EOL));
       return { bestName };
+    });
+  },
+  ensureSetMsvcEnv() {
+    return __async(this, null, function* () {
+      let ok = true;
+      yield (0, import_promises.access)(fnameSetMsvcEnv).catch(() => ok = false);
+      if (ok) {
+        console.log(`Found set-msv in the cache!`);
+      } else {
+        console.log(`DID NOT FIND set-msv`);
+        yield this.createSetMsvcEnv();
+        console.log(`finished creating set-msv`);
+      }
     });
   }
 };

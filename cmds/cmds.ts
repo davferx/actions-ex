@@ -1,10 +1,9 @@
 import {execSync, spawnSync} from 'child_process'
 import FastGlob from 'fast-glob'
-import {rmdir, unlink, writeFile, mkdir, readFile} from 'fs/promises'
-import Path from 'path'
+import {access, mkdir, rmdir, unlink, writeFile} from 'fs/promises'
 import OS from 'os'
 
-const fnameSetMsvcEnv = 'build/set-msvc-env.cmd'
+const fnameSetMsvcEnv = 'build/cache/set-msvc-env.cmd'
 
 function ignore() {}
 
@@ -17,50 +16,30 @@ function rmDirs(dirs: string[]) {
 }
 
 const commands = {
-    async updateFile() {
-        const dir = `${process.env['USERPROFILE']}/ctest`
-        const fname = `${dir}/number.txt`
-        console.log(`This is the file [${fname}]`)
-        const txt = (await readFile(fname, {encoding: 'utf8'}).catch(ignore)) ?? ''
-        console.log(`Text is [${txt}]`)
-        let num: number = Number.parseInt(txt)
-        console.log(`Number is [${num}]`)
-        if (isNaN(num)) {
-            console.log(`Creating dir --------------------------------`)
-            await mkdir(dir).catch(ignore)
-            console.log(`Made the dir --------------------------------`)
-            num = 0
-        }
-        ++num
-        await writeFile(fname, num.toString())
-    },
     async bare() {
         await this.clean()
         await Promise.all(rmFiles(['cmds/package-lock.json', 'cmds/pnpm-lock.yaml']))
-        await Promise.all(rmDirs(['cmds/node_modules', 'build', 'artifacts']))
+        await Promise.all(rmDirs(['cmds/node_modules', 'build']))
     },
     async clean() {
         await Promise.all(rmFiles(['cmds.js.map', '.pnpm-debug.log', '.ninja_log']))
     },
     async build() {
-        await this.updateFile()
-        const res = await this.createSetMsvcEnv()
-        const tmp = await FastGlob(FastGlob.escapePath(Path.posix.normalize(res!.bestName + '../../..')) + '/**/ninja.exe')
-        if (tmp[0]) process.env['path'] += `;${Path.dirname(tmp[0])}`
-        // spawnSync('cmd.exe', ['/c', 'ninja.exe', '-v', '>artifacts/build.log', '2>&1'], {stdio: 'inherit'})
+        await this.createDirs()
+        await this.ensureSetMsvcEnv()
+        //? spawnSync('cmd.exe', ['/c', 'call', fnameSetMsvcEnv, '&&', 'ninja.exe', '-v', '>build/artifacts/build.log', '2>&1'], {stdio: 'inherit'})
+        spawnSync('cmd.exe', ['/c', `call ${fnameSetMsvcEnv} && ninja.exe -v >build/artifacts/build.log 2>&1`], {stdio: 'inherit'})
     },
     async rebuild() {
-        await Promise.all(rmDirs(['build', 'artifacts']))
-        this.build()
+        await Promise.all(rmDirs(['build']))
+        await this.build()
     },
     async createDirs() {
-        const dirs = ['build/dbg', 'build/rel', 'artifacts/dbg', 'artifacts/rel']
+        const dirs = ['build/artifacts/dbg', 'build/artifacts/rel', 'build/cache', 'build/dbg', 'build/rel']
         const todo = dirs.map(x => mkdir(x, {recursive: true}).catch(ignore))
         await Promise.all(todo)
     },
     async createSetMsvcEnv() {
-        this.createDirs()
-
         //- Find the latest version of VsDevCmd.bat
         let bestVer = 0
         let bestName = ''
@@ -71,6 +50,9 @@ const commands = {
                 FastGlob(pattern)
                     .then(fnames => {
                         for (const fname of fnames) {
+                            // Peel out the year and pick most recent. Example file path:
+                            // C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat
+                            // 0  1                   2                       3
                             const ver = Number.parseInt(fname.split('/')[3]!)
                             if (!isNaN(ver) && bestVer < ver) {
                                 bestVer = ver
@@ -97,9 +79,23 @@ const commands = {
             let value = str.slice(i + 1)
             if (i === -1 || name.startsWith('__') || process.env[name] === value) continue
             psTxt.push(`set ${name}=${value}`)
+
+            //- Capture the path some some tools, like ninja, will work
+            //? if (name.toLowerCase() === 'path') process.env['path'] = value
         }
         await writeFile(fnameSetMsvcEnv, psTxt.join(OS.EOL))
         return {bestName: bestName}
+    },
+    async ensureSetMsvcEnv() {
+        let ok = true
+        await access(fnameSetMsvcEnv).catch(() => (ok = false))
+        if (ok) {
+            console.log(`Found set-msv in the cache!`)
+        } else {
+            console.log(`DID NOT FIND set-msv`)
+            await this.createSetMsvcEnv()
+            console.log(`finished creating set-msv`)
+        }
     }
 }
 
