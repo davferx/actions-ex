@@ -1,0 +1,446 @@
+Environment
+-----------
+ALLUSERSPROFILE=C:\ProgramData
+ANDROID_HOME=C:\Android\android-sdk
+ANDROID_NDK=C:\Android\android-sdk\ndk\25.1.8937393
+ANDROID_NDK_HOME=C:\Android\android-sdk\ndk\25.1.8937393
+ANDROID_NDK_LATEST_HOME=C:\Android\android-sdk\ndk\25.1.8937393
+ANDROID_NDK_ROOT=C:\Android\android-sdk\ndk\25.1.8937393
+ANDROID_SDK_ROOT=C:\Android\android-sdk
+ANT_HOME=C:\ProgramData\chocolatey\lib\ant\tools\apache-ant-1.10.12
+APPDATA=C:\Users\runneradmin\AppData\Roaming
+AZURE_EXTENSION_DIR=C:\Program Files\Common Files\AzureCliExtensionDirectory
+CABAL_DIR=C:\cabal
+ChocolateyInstall=C:\ProgramData\chocolatey
+ChromeWebDriver=C:\SeleniumWebDrivers\ChromeDriver
+CI=true
+CLANG_ROOT=C:\tools\msys64\mingw64\bin
+COBERTURA_HOME=C:\cobertura-2.1.1
+CommonProgramFiles=C:\Program Files\Common Files
+CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files
+CommonProgramW6432=C:\Program Files\Common Files
+COMPUTERNAME=fv-az448-426
+ComSpec=C:\Windows\system32\cmd.exe
+CONDA=C:\Miniconda
+DEPLOYMENT_BASEPATH=C:\actions
+DOTNET_MULTILEVEL_LOOKUP=0
+DriverData=C:\Windows\System32\Drivers\DriverData
+EdgeWebDriver=C:\SeleniumWebDrivers\EdgeDriver
+GCM_INTERACTIVE=Never
+GeckoWebDriver=C:\SeleniumWebDrivers\GeckoDriver
+GHCUP_INSTALL_BASE_PREFIX=C:\
+GHCUP_MSYS2=C:\msys64
+GITHUB_ACTION=__run
+GITHUB_ACTIONS=true
+GITHUB_ACTION_REF=
+GITHUB_ACTION_REPOSITORY=
+GITHUB_ACTOR=davferx
+GITHUB_API_URL=https://api.github.com
+GITHUB_BASE_REF=
+GITHUB_ENV=D:\a\_temp\_runner_file_commands\set_env_1c8ec27a-4ffb-458a-a3f0-55e77c01ef2e
+GITHUB_EVENT_NAME=push
+GITHUB_EVENT_PATH=D:\a\_temp\_github_workflow\event.json
+GITHUB_GRAPHQL_URL=https://api.github.com/graphql
+GITHUB_HEAD_REF=
+GITHUB_JOB=buildAndTest
+GITHUB_OUTPUT=D:\a\_temp\_runner_file_commands\set_output_1c8ec27a-4ffb-458a-a3f0-55e77c01ef2e
+GITHUB_PATH=D:\a\_temp\_runner_file_commands\add_path_1c8ec27a-4ffb-458a-a3f0-55e77c01ef2e
+GITHUB_REF=refs/heads/main
+GITHUB_REF_NAME=main
+GITHUB_REF_PROTECTED=false
+GITHUB_REF_TYPE=branch
+GITHUB_REPOSITORY=davferx/code-cmake-vcpkg
+GITHUB_REPOSITORY_OWNER=davferx
+GITHUB_RETENTION_DAYS=90
+GITHUB_RUN_ATTEMPT=1
+GITHUB_RUN_ID=3463496932
+GITHUB_RUN_NUMBER=16
+GITHUB_SERVER_URL=https://github.com
+GITHUB_SHA=82d483ee27698e326e57702d538fccf4bf114743
+GITHUB_STATE=D:\a\_temp\_runner_file_commands\save_state_1c8ec27a-4ffb-458a-a3f0-55e77c01ef2e
+GITHUB_STEP_SUMMARY=D:\a\_temp\_runner_file_commands\step_summary_1c8ec27a-4ffb-458a-a3f0-55e77c01ef2e
+GITHUB_TRIGGERING_ACTOR=davferx
+GITHUB_WORKFLOW=main
+GITHUB_WORKSPACE=D:\a\code-cmake-vcpkg\code-cmake-vcpkg
+GOROOT_1_17_X64=C:\hostedtoolcache\windows\go\1.17.13\x64
+GOROOT_1_18_X64=C:\hostedtoolcache\windows\go\1.18.7\x64
+GOROOT_1_19_X64=C:\hostedtoolcache\windows\go\1.19.2\x64
+GRADLE_HOME=C:\ProgramData\chocolatey\lib\gradle\tools\gradle-7.5.1
+HOMEDRIVE=C:
+HOMEPATH=\Users\runneradmin
+IEWebDriver=C:\SeleniumWebDrivers\IEDriver
+ImageOS=win22
+ImageVersion=20221027.1
+JAVA_HOME=C:\hostedtoolcache\windows\Java_Temurin-Hotspot_jdk\8.0.345-1\x64
+JAVA_HOME_11_X64=C:\hostedtoolcache\windows\Java_Temurin-Hotspot_jdk\11.0.17-8\x64
+JAVA_HOME_17_X64=C:\hostedtoolcache\windows\Java_Temurin-Hotspot_jdk\17.0.5-8\x64
+JAVA_HOME_8_X64=C:\hostedtoolcache\windows\Java_Temurin-Hotspot_jdk\8.0.345-1\x64
+LOCALAPPDATA=C:\Users\runneradmin\AppData\Local
+LOGONSERVER=\\fv-az448-426
+M2=C:\ProgramData\chocolatey\lib\maven\apache-maven-3.8.6\bin
+M2_REPO=C:\ProgramData\m2
+MAVEN_OPTS=-Xms256m
+MSVC_ROOT=C:\Program Files\Microsoft Visual Studio\2022\Enterprise
+npm_config_prefix=C:\npm\prefix
+NUMBER_OF_PROCESSORS=2
+OS=Windows_NT
+Path=C:\Program Files\PowerShell\7;C:\Program Files\MongoDB\Server\5.0\bin;C:\aliyun-cli;C:\vcpkg;C:\Program Files (x86)\NSIS\;C:\tools\zstd;C:\Program Files\Mercurial\;C:\hostedtoolcache\windows\stack\2.9.1\x64;C:\cabal\bin;C:\\ghcup\bin;C:\tools\ghc-9.4.2\bin;C:\Program Files\dotnet;C:\mysql\bin;C:\Program Files\R\R-4.2.1\bin\x64;C:\SeleniumWebDrivers\GeckoDriver;C:\Program Files (x86)\sbt\bin;C:\Program Files (x86)\GitHub CLI;C:\Program Files\Git\bin;C:\Program Files (x86)\pipx_bin;C:\npm\prefix;C:\hostedtoolcache\windows\go\1.17.13\x64\bin;C:\hostedtoolcache\windows\Python\3.9.13\x64\Scripts;C:\hostedtoolcache\windows\Python\3.9.13\x64;C:\hostedtoolcache\windows\Ruby\3.0.4\x64\bin;C:\tools\kotlinc\bin;C:\hostedtoolcache\windows\Java_Temurin-Hotspot_jdk\8.0.345-1\x64\bin;C:\Program Files\ImageMagick-7.1.0-Q16-HDRI;C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin;C:\ProgramData\kind;C:\Program Files\Microsoft\jdk-11.0.12.7-hotspot\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\ProgramData\Chocolatey\bin;C:\Program Files\PowerShell\7\;C:\Program Files\Microsoft\Web Platform Installer\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\OpenSSL\bin;C:\Strawberry\c\bin;C:\Strawberry\perl\site\bin;C:\Strawberry\perl\bin;C:\ProgramData\chocolatey\lib\pulumi\tools\Pulumi\bin;C:\Program Files\TortoiseSVN\bin;C:\Program Files\CMake\bin;C:\ProgramData\chocolatey\lib\maven\apache-maven-3.8.6\bin;C:\Program Files\Microsoft Service Fabric\bin\Fabric\Fabric.Code;C:\Program Files\Microsoft SDKs\Service Fabric\Tools\ServiceFabricLocalClusterManager;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Program Files\GitHub CLI\;c:\tools\php;C:\Program Files (x86)\sbt\bin;C:\SeleniumWebDrivers\ChromeDriver\;C:\SeleniumWebDrivers\EdgeDriver\;C:\Program Files\Amazon\AWSCLIV2\;C:\Program Files\Amazon\SessionManagerPlugin\bin\;C:\Program Files\Amazon\AWSSAMCLI\bin\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\LLVM\bin;C:\Users\runneradmin\.dotnet\tools;C:\Users\runneradmin\.cargo\bin;C:\Users\runneradmin\AppData\Local\Microsoft\WindowsApps
+PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL
+PERFLOG_LOCATION_SETTING=RUNNER_PERFLOG
+PGBIN=C:\Program Files\PostgreSQL\14\bin
+PGDATA=C:\Program Files\PostgreSQL\14\data
+PGPASSWORD=root
+PGROOT=C:\Program Files\PostgreSQL\14
+PGUSER=postgres
+PHPROOT=c:\tools\php
+PIPX_BIN_DIR=C:\Program Files (x86)\pipx_bin
+PIPX_HOME=C:\Program Files (x86)\pipx
+POWERSHELL_DISTRIBUTION_CHANNEL=GitHub-Actions-win22
+POWERSHELL_UPDATECHECK=Off
+PROCESSOR_ARCHITECTURE=AMD64
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 85 Stepping 7, GenuineIntel
+PROCESSOR_LEVEL=6
+PROCESSOR_REVISION=5507
+ProgramData=C:\ProgramData
+ProgramFiles=C:\Program Files
+ProgramFiles(x86)=C:\Program Files (x86)
+ProgramW6432=C:\Program Files
+PROMPT=$P$G
+PSModulePath=C:\Users\runneradmin\Documents\PowerShell\Modules;C:\Program Files\PowerShell\Modules;c:\program files\powershell\7\Modules;C:\\Modules\azurerm_2.1.0;C:\\Modules\azure_2.1.0;C:\Users\packer\Documents\WindowsPowerShell\Modules;C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules;C:\Program Files\Microsoft SQL Server\130\Tools\PowerShell\Modules\
+PUBLIC=C:\Users\Public
+RTOOLS40_HOME=C:\rtools40
+RUNNER_ARCH=X64
+RUNNER_NAME=Hosted Agent
+RUNNER_OS=Windows
+RUNNER_PERFLOG=C:\actions\perflog
+RUNNER_TEMP=D:\a\_temp
+RUNNER_TOOL_CACHE=C:\hostedtoolcache\windows
+RUNNER_TRACKING_ID=github_295b5b0a-8d77-4e5c-ba16-7d70c12edf11
+RUNNER_WORKSPACE=D:\a\code-cmake-vcpkg
+SBT_HOME=C:\Program Files (x86)\sbt\
+SELENIUM_JAR_PATH=C:\selenium\selenium-server.jar
+STATS_PFS=true
+STATS_RDCL=true
+SystemDrive=C:
+SystemRoot=C:\Windows
+TEMP=C:\Users\RUNNER~1\AppData\Local\Temp
+TMP=C:\Users\RUNNER~1\AppData\Local\Temp
+USERDOMAIN=fv-az448-426
+USERDOMAIN_ROAMINGPROFILE=fv-az448-426
+USERNAME=runneradmin
+USERPROFILE=C:\Users\runneradmin
+VCPKG_INSTALLATION_ROOT=C:\vcpkg
+windir=C:\Windows
+WIX=C:\Program Files (x86)\WiX Toolset v3.11\
+
+Path
+-----
+C:\Program Files\PowerShell\7
+C:\Program Files\MongoDB\Server\5.0\bin
+C:\aliyun-cli
+C:\vcpkg
+C:\Program Files (x86)\NSIS\
+C:\tools\zstd
+C:\Program Files\Mercurial\
+C:\hostedtoolcache\windows\stack\2.9.1\x64
+C:\cabal\bin
+C:\\ghcup\bin
+C:\tools\ghc-9.4.2\bin
+C:\Program Files\dotnet
+C:\mysql\bin
+C:\Program Files\R\R-4.2.1\bin\x64
+C:\SeleniumWebDrivers\GeckoDriver
+C:\Program Files (x86)\sbt\bin
+C:\Program Files (x86)\GitHub CLI
+C:\Program Files\Git\bin
+C:\Program Files (x86)\pipx_bin
+C:\npm\prefix
+C:\hostedtoolcache\windows\go\1.17.13\x64\bin
+C:\hostedtoolcache\windows\Python\3.9.13\x64\Scripts
+C:\hostedtoolcache\windows\Python\3.9.13\x64
+C:\hostedtoolcache\windows\Ruby\3.0.4\x64\bin
+C:\tools\kotlinc\bin
+C:\hostedtoolcache\windows\Java_Temurin-Hotspot_jdk\8.0.345-1\x64\bin
+C:\Program Files\ImageMagick-7.1.0-Q16-HDRI
+C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin
+C:\ProgramData\kind
+C:\Program Files\Microsoft\jdk-11.0.12.7-hotspot\bin
+C:\Windows\system32
+C:\Windows
+C:\Windows\System32\Wbem
+C:\Windows\System32\WindowsPowerShell\v1.0\
+C:\Windows\System32\OpenSSH\
+C:\Program Files\dotnet\
+C:\ProgramData\Chocolatey\bin
+C:\Program Files\PowerShell\7\
+C:\Program Files\Microsoft\Web Platform Installer\
+C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\
+C:\Program Files\Microsoft SQL Server\150\Tools\Binn\
+C:\Program Files\OpenSSL\bin
+C:\Strawberry\c\bin
+C:\Strawberry\perl\site\bin
+C:\Strawberry\perl\bin
+C:\ProgramData\chocolatey\lib\pulumi\tools\Pulumi\bin
+C:\Program Files\TortoiseSVN\bin
+C:\Program Files\CMake\bin
+C:\ProgramData\chocolatey\lib\maven\apache-maven-3.8.6\bin
+C:\Program Files\Microsoft Service Fabric\bin\Fabric\Fabric.Code
+C:\Program Files\Microsoft SDKs\Service Fabric\Tools\ServiceFabricLocalClusterManager
+C:\Program Files\nodejs\
+C:\Program Files\Git\cmd
+C:\Program Files\Git\mingw64\bin
+C:\Program Files\Git\usr\bin
+C:\Program Files\GitHub CLI\
+c:\tools\php
+C:\Program Files (x86)\sbt\bin
+C:\SeleniumWebDrivers\ChromeDriver\
+C:\SeleniumWebDrivers\EdgeDriver\
+C:\Program Files\Amazon\AWSCLIV2\
+C:\Program Files\Amazon\SessionManagerPlugin\bin\
+C:\Program Files\Amazon\AWSSAMCLI\bin\
+C:\Program Files\Microsoft SQL Server\130\Tools\Binn\
+C:\Program Files\LLVM\bin
+C:\Users\runneradmin\.dotnet\tools
+C:\Users\runneradmin\.cargo\bin
+C:\Users\runneradmin\AppData\Local\Microsoft\WindowsApps
+
+Root Dir C
+----------
+ Volume in drive C is Windows
+ Volume Serial Number is 3E7B-60FD
+
+ Directory of c:\
+
+11/14/2022  04:55 PM    <DIR>          actions
+10/28/2022  01:26 AM    <DIR>          aliyun-cli
+10/28/2022  12:10 AM    <DIR>          Android
+02/26/2015  11:23 PM    <DIR>          cobertura-2.1.1
+11/14/2022  04:55 PM    <DIR>          data
+10/28/2022  01:12 AM    <DIR>          ghcup
+10/27/2022  11:43 PM    <DIR>          hostedtoolcache
+10/27/2022  09:12 PM    <DIR>          image
+10/27/2022  09:27 PM    <DIR>          inetpub
+10/27/2022  11:40 PM    <DIR>          Julia
+10/27/2022  10:46 PM    <DIR>          Microsoft
+10/28/2022  01:14 AM    <DIR>          Miniconda
+10/28/2022  12:28 AM    <DIR>          Modules
+10/28/2022  12:50 AM    <DIR>          msys64
+09/13/2022  05:39 PM    <DIR>          mysql
+10/28/2022  12:06 AM    <DIR>          npm
+11/04/2022  02:34 PM    <DIR>          Packages
+05/08/2021  08:20 AM    <DIR>          PerfLogs
+10/27/2022  09:11 PM    <DIR>          post-generation
+10/28/2022  01:43 AM    <DIR>          Program Files
+10/28/2022  01:18 AM    <DIR>          Program Files (x86)
+10/28/2022  12:53 AM    <DIR>          rtools40
+11/04/2022  02:36 PM    <DIR>          runners
+10/28/2022  12:47 AM    <DIR>          selenium
+10/28/2022  12:46 AM    <DIR>          SeleniumWebDrivers
+10/28/2022  01:41 AM    <DIR>          shells
+10/27/2022  11:38 PM    <DIR>          Strawberry
+10/07/2022  11:02 PM    <DIR>          Temp
+10/28/2022  01:18 AM    <DIR>          tools
+11/04/2022  02:35 PM    <DIR>          Users
+10/28/2022  01:19 AM    <DIR>          vcpkg
+11/04/2022  02:34 PM    <DIR>          Windows
+11/04/2022  02:38 PM    <DIR>          WindowsAzure
+05/06/2022  07:37 PM           112,104 appverifUI.dll
+11/04/2022  02:43 PM               434 imagedata.json
+10/28/2022  02:02 AM            41,898 InstalledSoftware.md
+05/06/2022  07:37 PM            66,200 vfcompat.dll
+               4 File(s)        220,636 bytes
+              33 Dir(s)  102,680,760,320 bytes free
+
+Root Dir D
+----------
+ Volume in drive D is Temporary Storage
+ Volume Serial Number is 5667-3687
+
+ Directory of d:\
+
+11/14/2022  04:55 PM    <DIR>          a
+11/14/2022  04:46 PM    <DIR>          CollectGuestLogsTemp
+11/14/2022  04:46 PM                25 cmds.txt
+09/27/2022  03:38 PM               709 DATALOSS_WARNING_README.txt
+11/14/2022  04:46 PM               231 diskpartlog.txt
+11/14/2022  04:46 PM               279 resizepartition.ps1
+               4 File(s)          1,244 bytes
+               2 Dir(s)  13,091,082,240 bytes free
+
+Root Dir E
+----------
+ Volume in drive D is Temporary Storage
+ Volume Serial Number is 5667-3687
+
+ Directory of d:\
+
+11/14/2022  04:55 PM    <DIR>          a
+11/14/2022  04:46 PM    <DIR>          CollectGuestLogsTemp
+11/14/2022  04:46 PM                25 cmds.txt
+09/27/2022  03:38 PM               709 DATALOSS_WARNING_README.txt
+11/14/2022  04:46 PM               231 diskpartlog.txt
+11/14/2022  04:46 PM               279 resizepartition.ps1
+               4 File(s)          1,244 bytes
+               2 Dir(s)  13,091,082,240 bytes free
+
+Root Dir F
+----------
+
+Program Files
+-------------
+ Volume in drive C is Windows
+ Volume Serial Number is 3E7B-60FD
+
+ Directory of c:\Program Files
+
+10/28/2022  01:43 AM    <DIR>          .
+10/27/2022  11:34 PM    <DIR>          7-Zip
+10/28/2022  12:56 AM    <DIR>          Amazon
+10/27/2022  09:48 PM    <DIR>          Android
+10/27/2022  10:32 PM    <DIR>          Application Verifier
+10/28/2022  01:16 AM    <DIR>          Azure Cosmos DB Emulator
+10/27/2022  11:41 PM    <DIR>          CMake
+10/27/2022  11:39 PM    <DIR>          Common Files
+10/27/2022  10:21 PM    <DIR>          dotnet
+10/28/2022  12:31 AM    <DIR>          Git
+10/28/2022  12:32 AM    <DIR>          GitHub CLI
+10/28/2022  12:44 AM    <DIR>          Google
+10/27/2022  10:07 PM    <DIR>          IIS
+10/27/2022  10:06 PM    <DIR>          IIS Express
+10/27/2022  11:42 PM    <DIR>          ImageMagick-7.1.0-Q16-HDRI
+10/07/2022  09:56 PM    <DIR>          Internet Explorer
+10/28/2022  01:43 AM    <DIR>          LLVM
+10/28/2022  01:17 AM    <DIR>          Mercurial
+10/27/2022  09:51 PM    <DIR>          Microsoft
+10/27/2022  11:48 PM    <DIR>          Microsoft SDKs
+10/27/2022  11:48 PM    <DIR>          Microsoft Service Fabric
+10/28/2022  12:58 AM    <DIR>          Microsoft SQL Server
+10/27/2022  09:47 PM    <DIR>          Microsoft Visual Studio
+05/08/2021  08:20 AM    <DIR>          ModifiableWindowsApps
+10/28/2022  01:27 AM    <DIR>          MongoDB
+10/28/2022  12:46 AM    <DIR>          Mozilla Firefox
+10/27/2022  09:27 PM    <DIR>          MSBuild
+10/28/2022  12:07 AM    <DIR>          nodejs
+10/27/2022  11:36 PM    <DIR>          OpenSSL
+10/27/2022  09:13 PM    <DIR>          PackageManagement
+10/28/2022  01:20 AM    <DIR>          PostgreSQL
+10/27/2022  09:45 PM    <DIR>          PowerShell
+10/28/2022  12:52 AM    <DIR>          R
+10/27/2022  09:27 PM    <DIR>          Reference Assemblies
+10/27/2022  11:39 PM    <DIR>          TortoiseSVN
+10/27/2022  10:49 PM    <DIR>          Unity Hub
+10/27/2022  10:14 PM    <DIR>          VS2010Schemas
+10/27/2022  10:14 PM    <DIR>          VS2012Schemas
+10/27/2022  11:20 PM    <DIR>          Windows Defender
+10/07/2022  09:56 PM    <DIR>          Windows Defender Advanced Threat Protection
+10/07/2022  09:56 PM    <DIR>          Windows Mail
+10/07/2022  09:56 PM    <DIR>          Windows Media Player
+05/08/2021  09:35 AM    <DIR>          Windows NT
+10/07/2022  09:56 PM    <DIR>          Windows Photo Viewer
+10/27/2022  09:13 PM    <DIR>          WindowsPowerShell
+               0 File(s)              0 bytes
+              45 Dir(s)  102,680,760,320 bytes free
+
+Program Files (x86)
+-------------------
+ Volume in drive C is Windows
+ Volume Serial Number is 3E7B-60FD
+
+ Directory of c:\Program Files (x86)
+
+10/28/2022  01:18 AM    <DIR>          .
+10/27/2022  09:57 PM    <DIR>          Android
+10/27/2022  10:32 PM    <DIR>          Application Verifier
+10/27/2022  11:39 PM    <DIR>          Common Files
+10/27/2022  10:00 PM    <DIR>          dotnet
+10/27/2022  10:50 PM    <DIR>          Epic Games
+10/28/2022  01:51 AM    <DIR>          Google
+10/27/2022  10:25 PM    <DIR>          HTML Help Workshop
+10/27/2022  10:07 PM    <DIR>          IIS
+10/27/2022  10:06 PM    <DIR>          IIS Express
+10/27/2022  11:35 PM    <DIR>          Inno Setup 6
+10/07/2022  09:56 PM    <DIR>          Internet Explorer
+10/27/2022  10:50 PM    <DIR>          Microsoft
+10/27/2022  11:32 PM    <DIR>          Microsoft SDKs
+10/28/2022  12:58 AM    <DIR>          Microsoft SQL Server
+10/27/2022  09:47 PM    <DIR>          Microsoft Visual Studio
+10/28/2022  12:58 AM    <DIR>          Microsoft Visual Studio 14.0
+10/27/2022  10:06 PM    <DIR>          Microsoft Web Tools
+10/27/2022  10:05 PM    <DIR>          Microsoft.NET
+10/28/2022  12:46 AM    <DIR>          Mozilla Maintenance Service
+10/27/2022  09:58 PM    <DIR>          MSBuild
+10/28/2022  01:18 AM    <DIR>          NSIS
+10/27/2022  10:14 PM    <DIR>          NuGet
+10/27/2022  10:50 PM    <DIR>          Open XML SDK
+10/28/2022  12:29 AM    <DIR>          pipx
+10/28/2022  12:30 AM    <DIR>          pipx_bin
+10/27/2022  09:27 PM    <DIR>          Reference Assemblies
+10/28/2022  12:43 AM    <DIR>          sbt
+10/28/2022  12:52 AM    <DIR>          Windows Application Driver
+05/08/2021  09:35 AM    <DIR>          Windows Defender
+10/27/2022  10:16 PM    <DIR>          Windows Kits
+10/07/2022  09:56 PM    <DIR>          Windows Mail
+10/07/2022  09:56 PM    <DIR>          Windows Media Player
+05/08/2021  09:35 AM    <DIR>          Windows NT
+10/07/2022  09:56 PM    <DIR>          Windows Photo Viewer
+05/08/2021  08:34 AM    <DIR>          WindowsPowerShell
+10/27/2022  11:13 PM    <DIR>          WiX Toolset v3.11
+10/27/2022  10:50 PM    <DIR>          Workflow Manager Tools
+10/27/2022  09:57 PM    <DIR>          Xamarin
+               0 File(s)              0 bytes
+              39 Dir(s)  102,680,760,320 bytes free
+
+msys64
+-------------
+ Volume in drive C is Windows
+ Volume Serial Number is 3E7B-60FD
+
+ Directory of c:\msys64
+
+10/28/2022  12:50 AM    <DIR>          .
+10/28/2022  12:49 AM    <DIR>          clang32
+10/28/2022  12:49 AM    <DIR>          clang64
+10/28/2022  12:49 AM    <DIR>          clangarm64
+10/28/2022  12:50 AM    <DIR>          dev
+10/28/2022  12:51 AM    <DIR>          etc
+11/04/2022  02:38 PM    <DIR>          home
+10/28/2022  12:50 AM    <DIR>          installerResources
+10/28/2022  12:49 AM    <DIR>          mingw32
+10/28/2022  12:49 AM    <DIR>          mingw64
+10/28/2022  12:49 AM    <DIR>          opt
+10/28/2022  01:12 AM    <DIR>          tmp
+10/28/2022  12:49 AM    <DIR>          ucrt64
+10/28/2022  12:49 AM    <DIR>          usr
+10/28/2022  12:49 AM    <DIR>          var
+05/15/2022  05:44 PM                82 autorebase.bat
+05/14/2022  10:53 AM            80,119 clang32.exe
+06/30/2022  06:24 AM            30,395 clang32.ico
+05/14/2022  10:53 AM               154 clang32.ini
+05/14/2022  10:53 AM            80,119 clang64.exe
+06/30/2022  06:24 AM            30,450 clang64.ico
+05/14/2022  10:53 AM               154 clang64.ini
+05/14/2022  10:53 AM            80,119 clangarm64.exe
+06/30/2022  06:24 AM            30,394 clangarm64.ico
+05/14/2022  10:53 AM               157 clangarm64.ini
+10/28/2022  12:50 AM               999 components.xml
+10/28/2022  12:50 AM             6,162 InstallationLog.txt
+10/28/2022  12:50 AM                48 installer.dat
+05/14/2022  10:53 AM            80,119 mingw32.exe
+06/30/2022  06:24 AM            30,309 mingw32.ico
+05/14/2022  10:53 AM               154 mingw32.ini
+05/14/2022  10:53 AM            80,119 mingw64.exe
+06/30/2022  06:24 AM            30,532 mingw64.ico
+05/14/2022  10:53 AM               154 mingw64.ini
+05/14/2022  10:53 AM            88,311 msys2.exe
+06/30/2022  06:24 AM            38,434 msys2.ico
+05/14/2022  10:53 AM               151 msys2.ini
+06/30/2022  06:24 AM             8,780 msys2_shell.cmd
+10/28/2022  12:50 AM               362 network.xml
+05/14/2022  10:53 AM            80,119 ucrt64.exe
+06/30/2022  06:24 AM            30,459 ucrt64.ico
+05/14/2022  10:53 AM               153 ucrt64.ini
+10/28/2022  12:50 AM            47,537 uninstall.dat
+10/28/2022  12:50 AM        32,108,032 uninstall.exe
+10/28/2022  12:50 AM             4,764 uninstall.ini
+              30 File(s)     32,967,841 bytes
+              15 Dir(s)  102,680,760,320 bytes free
