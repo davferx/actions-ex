@@ -17,3 +17,42 @@ https://raw.githubusercontent.com/boostcon/cppnow_presentations_2017/master/05-1
 
 A modern implementation of a cpp library that uses cmake and conan, based on Effective CMake, Modern CMake.
 https://github.com/egendron93/cpp_library_template
+
+
+
+# Decorator Pattern
+https://mermaid-js.github.io/mermaid/#/classDiagram<br>
+
+::: mermaid
+classDiagram
+    Component <|-- ConcreteComponent
+    Component <|-- Decorator
+    Decorator <|-- DecoratorA
+    Decorator <|-- DecoratorB
+
+    class Component {
+        methodA()
+        methodB()
+    }
+    class ConcreteComponent {
+        methodA()
+        methodB()
+    }
+    class Decorator {
+        -Component _obj
+        methodA()
+        methodB()
+    }
+    class DecoratorA {
+        methodA()
+        methodB()
+        newBehavior()
+    }
+    class DecoratorB {
+        Object newState
+        methodA()
+        methodB()
+    }
+:::
+
+Now is the time for all good men.
