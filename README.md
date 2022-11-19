@@ -23,7 +23,7 @@ https://github.com/egendron93/cpp_library_template
 # Decorator Pattern
 https://mermaid-js.github.io/mermaid/#/classDiagram<br>
 
-::: mermaid
+```mermaid
 classDiagram
     Component <|-- ConcreteComponent
     Component <|-- Decorator
@@ -53,6 +53,6 @@ classDiagram
         methodA()
         methodB()
     }
-:::
+```
 
 Now is the time for all good men.
